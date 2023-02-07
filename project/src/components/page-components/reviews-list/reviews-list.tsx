@@ -1,5 +1,5 @@
 import ReviewItem from '../review-item/review-item';
-import { Review } from '../../../types/types';
+import { Review } from '../../../types/user-data.interface';
 import dayjs from 'dayjs';
 
 type ReviewsListProps = {

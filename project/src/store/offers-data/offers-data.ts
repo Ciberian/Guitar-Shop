@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants';
-import { OfferData } from '../../types/state';
+import { OfferData } from '../../types/state.types';
 import {
   fetchOfferAction,
   fetchOffersAction,
@@ -80,4 +80,3 @@ export const offersData = createSlice({
       });
   },
 });
-

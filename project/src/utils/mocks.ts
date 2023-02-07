@@ -1,5 +1,5 @@
 import { datatype, name, internet, image, address, random, date } from 'faker';
-import { Offer, Point, Review, UserInfo } from '../types/types';
+import { Offer, Point, Review, UserInfo } from '../types/user-data.interface';
 import { DEFAULT_OFFER_ID, MOCK_OFFERS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
 
 export const makeFakeUserInfo = (): UserInfo => ({
@@ -68,4 +68,3 @@ export const fakeOffer = makeFakeOffer(DEFAULT_OFFER_ID);
 export const fakeOffers = new Array(MOCK_OFFERS_COUNT).fill(null).map((offer, index) => makeFakeOffer(index));
 
 export const fakeReviews = new Array(MOCK_REVIEWS_COUNT).fill(null).map(() => makeFakeReview());
-

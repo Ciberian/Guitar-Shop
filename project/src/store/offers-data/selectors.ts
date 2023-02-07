@@ -1,6 +1,6 @@
 import { NameSpace } from '../../constants';
-import { State } from '../../types/state';
-import { Offer, Review } from '../../types/types';
+import { State } from '../../types/state.types';
+import { Offer, Review } from '../../types/user-data.interface';
 
 export const getOffers = (state: State): Offer[] => state[NameSpace.Data].offers;
 export const getOffer = (state: State): Offer | null => state[NameSpace.Data].offer;
@@ -10,4 +10,3 @@ export const getReviews = (state: State): Review[] | null => state[NameSpace.Dat
 export const getNearbyOffers = (state: State): Offer[] | null => state[NameSpace.Data].nearbyOffers;
 export const getLoadedDataStatus = (state: State): boolean => state[NameSpace.Data].isDataLoaded;
 export const getLoadedOfferStatus = (state: State): boolean => state[NameSpace.Data].isOfferLoaded;
-

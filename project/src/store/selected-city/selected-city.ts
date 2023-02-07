@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SelectedCity } from '../../types/state';
+import { SelectedCity } from '../../types/state.types';
 import { NameSpace } from '../../constants';
 
 const initialState: SelectedCity = {
@@ -17,4 +17,3 @@ export const selectedCity = createSlice({
 });
 
 export const { changeCity } = selectedCity.actions;
-

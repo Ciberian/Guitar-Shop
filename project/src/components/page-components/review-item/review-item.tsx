@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Review } from '../../../types/types';
+import { Review } from '../../../types/user-data.interface';
 import { ONE_STAR_RATING_IN_PERCENT } from '../../../constants';
 
 type ReviewItemProps = {

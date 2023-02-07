@@ -2,7 +2,7 @@ import { useRef, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { loginAction } from '../../../store/api-actions';
-import { AuthData } from '../../../types/types';
+import { AuthData } from '../../../types/user-data.interface';
 import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 
@@ -79,7 +79,7 @@ function RegisterPage(): JSX.Element {
                 />
               </div>
               <button className="login__submit form__submit button" type="submit">
-								Sign in
+                Sign in
               </button>
             </form>
           </section>
@@ -97,4 +97,3 @@ function RegisterPage(): JSX.Element {
 }
 
 export default RegisterPage;
-

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SelectedPoint } from '../../types/state';
+import { SelectedPoint } from '../../types/state.types';
 import { NameSpace } from '../../constants';
 
 const initialState: SelectedPoint = {

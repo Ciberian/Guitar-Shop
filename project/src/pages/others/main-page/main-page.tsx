@@ -4,7 +4,7 @@ import LocationList from '../../../components/location-list/location-list';
 import OfferListEmpty from '../../../components/offer-list-empty/offer-list-empty';
 import SortOffers from '../../../components/sort-offers/sort-offers';
 import OfferList from '../../../components/offer-list/offer-list';
-import { Offer } from '../../../types/types';
+import { Offer } from '../../../types/user-data.interface';
 import { SortType } from '../../../constants';
 import { getOffers } from '../../../store/offers-data/selectors';
 import { getCity } from '../../../store/selected-city/selectors';

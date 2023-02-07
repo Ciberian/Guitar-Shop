@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CurrentError } from '../../types/state';
+import { CurrentError } from '../../types/state.types';
 import { NameSpace } from '../../constants';
 
 const initialState: CurrentError = {
@@ -17,4 +17,3 @@ export const errorProcess = createSlice({
 });
 
 export const { setError } = errorProcess.actions;
-
