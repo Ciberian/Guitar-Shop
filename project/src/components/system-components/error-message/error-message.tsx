@@ -1,5 +1,5 @@
-import { NameSpace } from '../../constants';
-import { useAppSelector } from '../../hooks';
+import { NameSpace } from '../../../constants';
+import { useAppSelector } from '../../../hooks';
 import './error-message.css';
 
 function ErrorMessage(): JSX.Element | null {

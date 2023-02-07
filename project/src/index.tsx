@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import { checkAuthAction, fetchOffersAction } from './store/api-actions';
-import HistoryRouter from './components/history-router/history-router';
-import ErrorMessage from './components/error-message/error-message';
+import HistoryRouter from './components/system-components/history-router/history-router';
+import ErrorMessage from './components/system-components/error-message/error-message';
 import browserHistory from './browser-history';
-import App from './components/app/app';
+import App from './components/system-components/app/app';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());

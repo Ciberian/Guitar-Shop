@@ -1,12 +1,12 @@
 import ReviewItem from '../review-item/review-item';
-import { Review } from '../../types/types';
+import { Review } from '../../../types/types';
 import dayjs from 'dayjs';
 
-type ReviewListProps = {
+type ReviewsListProps = {
   reviews: Review[];
-}
+};
 
-function ReviewList({ reviews }: ReviewListProps): JSX.Element {
+function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
   const offerReviews = [...reviews];
   return (
     <>
@@ -25,4 +25,4 @@ function ReviewList({ reviews }: ReviewListProps): JSX.Element {
   );
 }
 
-export default ReviewList;
+export default ReviewsList;

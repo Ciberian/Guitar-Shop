@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../hooks/index';
-import SiteHeader from '../../../components/site-header/site-header';
+import SiteHeader from '../../../components/page-components/site-header/site-header';
 import LocationList from '../../../components/location-list/location-list';
 import OfferListEmpty from '../../../components/offer-list-empty/offer-list-empty';
 import SortOffers from '../../../components/sort-offers/sort-offers';
@@ -81,4 +81,3 @@ function MainPage(): JSX.Element {
   }
 }
 export default MainPage;
-

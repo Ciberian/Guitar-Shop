@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import SiteHeader from '../../../components/site-header/site-header';
+import SiteHeader from '../../../components/page-components/site-header/site-header';
 import './page-not-found.css';
 
 function NotFoundPage(): JSX.Element {
@@ -14,7 +14,7 @@ function NotFoundPage(): JSX.Element {
               <h1>404 Error</h1>
               <b className="favorites__status">This page does not exist.</b>
               <p className="favorites__status-description not-found-description">
-								Would you like to back on the <Link to={'/'}>main page</Link>?
+                Would you like to back on the <Link to={'/'}>main page</Link>?
               </p>
             </div>
           </section>
@@ -30,4 +30,3 @@ function NotFoundPage(): JSX.Element {
 }
 
 export default NotFoundPage;
-

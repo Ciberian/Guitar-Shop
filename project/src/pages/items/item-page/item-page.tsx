@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import SiteHeader from '../../../components/site-header/site-header';
+import SiteHeader from '../../../components/page-components/site-header/site-header';
 import OfferGallery from '../../../components/offer-gallery/offer-gallery';
 import OfferItems from '../../../components/offer-items/offer-items';
-import ReviewList from '../../../components/review-list/review-list';
-import ReviewForm from '../../../components/review-form/review-form';
+import ReviewList from '../../../components/page-components/reviews-list/reviews-list';
+import ReviewForm from '../../../components/modals/review-form/review-form';
 import OfferList from '../../../components/offer-list/offer-list';
 import OfferPageMap from '../../../components/offer-page-map/offer-page-map';
-import LoadingScreen from '../../../components/loading-screen/loading-screen';
+import LoadingScreen from '../../../components/system-components/loading-screen/loading-screen';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus, ONE_STAR_RATING_IN_PERCENT } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
@@ -71,8 +71,7 @@ function OfferPage(): JSX.Element {
                   }}
                   className={`property__bookmark-button
                     ${offer && offer.isFavorite ? 'property__bookmark-button--active' : ''} button`}
-                  type="button"
-                >
+                  type="button">
                   <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -142,4 +141,3 @@ function OfferPage(): JSX.Element {
 }
 
 export default OfferPage;
-

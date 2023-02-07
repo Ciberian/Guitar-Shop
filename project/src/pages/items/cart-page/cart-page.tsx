@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../hooks';
-import SiteHeader from '../../../components/site-header/site-header';
+import SiteHeader from '../../../components/page-components/site-header/site-header';
 import FavoriteList from '../../../components/favorite-list/favorite-list';
 import FavoriteListEmpty from '../../../components/favorite-list-empty/favorite-list-empty';
 import { getFavoriteOffersCount } from '../../../store/offers-data/selectors';
@@ -13,11 +13,7 @@ function FavoritesPage(): JSX.Element {
       <SiteHeader />
 
       <main className={`page__main page__main--favorites ${favoriteOffersCount ? '' : 'page__main--favorites-empty'}`}>
-        <div className="page__favorites-container container">
-          {favoriteOffersCount ?
-            <FavoriteList /> :
-            <FavoriteListEmpty />}
-        </div>
+        <div className="page__favorites-container container">{favoriteOffersCount ? <FavoriteList /> : <FavoriteListEmpty />}</div>
       </main>
 
       <footer className="footer container">

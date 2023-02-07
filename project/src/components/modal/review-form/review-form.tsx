@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { useAppDispatch } from '../../hooks';
-import { fetchNewReviewAction } from '../../store/api-actions';
-import ReviewRating from '../review-rating/review-rating';
+import { useAppDispatch } from '../../../hooks';
+import { fetchNewReviewAction } from '../../../store/api-actions';
+import ReviewRating from '../../common/review-rating/review-rating';
 
 const MAX_REVIEW_RATING = 5;
 const MIN_REVIEW_RATING = 1;
@@ -10,7 +10,7 @@ const MAX_REVIEW_SIMBOLS = 300;
 
 type ReviewFormProps = {
   id: number;
-}
+};
 
 function ReviewForm({ id }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,7 +30,6 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
     setformData({ ...formData, [name]: value });
   };
 
-
   const getReviewRating = () => {
     const reviewRating: JSX.Element[] = [];
 
@@ -48,12 +47,12 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
       method="post"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        dispatch(fetchNewReviewAction({rating: Number(formData.rating), review: formData.comment, id: id}));
+        dispatch(fetchNewReviewAction({ rating: Number(formData.rating), review: formData.comment, id: id }));
         setformData({ rating: '', comment: '' });
       }}
     >
       <label className="reviews__label form__label" htmlFor="review">
-				Your review
+        Your review
       </label>
       <div className="reviews__rating-form form__rating">{getReviewRating()}</div>
       <textarea
@@ -67,15 +66,11 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-					To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least{' '}
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least{' '}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button
-          className="reviews__submit form__submit button"
-          type="submit"
-          disabled={!isReviewLongEnough() || !formData.rating}
-        >
-					Submit
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isReviewLongEnough() || !formData.rating}>
+          Submit
         </button>
       </div>
     </form>
