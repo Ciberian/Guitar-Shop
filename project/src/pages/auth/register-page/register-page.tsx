@@ -2,7 +2,7 @@ import { useRef, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { loginAction } from '../../../store/api-actions';
-import { AuthData } from '../../../types/user-data.interface';
+import { AuthData } from '../../../types/auth-data.interface';
 import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 

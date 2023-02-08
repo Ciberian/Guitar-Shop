@@ -1,18 +1,13 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SiteHeader from '../../../components/page-components/site-header/site-header';
-import OfferGallery from '../../../components/offer-gallery/offer-gallery';
-import OfferItems from '../../../components/offer-items/offer-items';
 import ReviewList from '../../../components/page-components/reviews-list/reviews-list';
-import ReviewForm from '../../../components/modals/review-form/review-form';
-import OfferList from '../../../components/offer-list/offer-list';
-import OfferPageMap from '../../../components/offer-page-map/offer-page-map';
 import LoadingScreen from '../../../components/system-components/loading-screen/loading-screen';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus, ONE_STAR_RATING_IN_PERCENT } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction, changeFavoriteOffersAction } from '../../../store/api-actions';
-import { getLoadedOfferStatus, getNearbyOffers, getOffer, getReviews } from '../../../store/offers-data/selectors';
+import { getLoadedOfferStatus, getOffer, getReviews } from '../../../store/offers-data/selectors';
 
 function OfferPage(): JSX.Element {
   const isOfferLoaded = useAppSelector(getLoadedOfferStatus);
@@ -24,7 +19,6 @@ function OfferPage(): JSX.Element {
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   const offer = useAppSelector(getOffer);
   const reviews = useAppSelector(getReviews);
-  const nearbyOffers = useAppSelector(getNearbyOffers);
 
   useEffect(() => {
     dispatch(fetchOfferAction(Number(id)));
@@ -37,7 +31,7 @@ function OfferPage(): JSX.Element {
   }
 
   if (!offer) {
-    navigate(AppRoute.PageNotFound);
+    navigate(AppRoute.NotFoundPage);
   }
 
   return (
@@ -47,7 +41,7 @@ function OfferPage(): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <div className="property__gallery">{offer ? <OfferGallery images={offer.images} /> : <p>There are no pictures of this property</p>}</div>
+            <div className="property__gallery"></div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
@@ -71,7 +65,8 @@ function OfferPage(): JSX.Element {
                   }}
                   className={`property__bookmark-button
                     ${offer && offer.isFavorite ? 'property__bookmark-button--active' : ''} button`}
-                  type="button">
+                  type="button"
+                >
                   <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -96,7 +91,6 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
-                {offer ? <OfferItems items={offer.goods} /> : <p>There are no special items for this property</p>}
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
@@ -121,18 +115,13 @@ function OfferPage(): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 {reviews ? <ReviewList reviews={reviews} /> : null}
-                {isAuthorized ? <ReviewForm id={Number(id)} /> : null}
               </section>
             </div>
           </div>
-          <section className="property__map map">
-            {offer?.city && nearbyOffers ? <OfferPageMap currentOfferLocation={offer.location} currentCity={offer.city} nearbyOffers={nearbyOffers} /> : ''}
-          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">{nearbyOffers ? <OfferList offers={nearbyOffers} classPrefix={'near-places'} /> : ''}</div>
           </section>
         </div>
       </main>

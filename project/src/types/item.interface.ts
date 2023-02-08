@@ -1,13 +1,13 @@
 export interface IItem {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   image: string;
   type: 'электро' | 'аккустика' | 'укулеле';
   code: string;
   strings: 4 | 6 | 7 | 12;
-  rating: number;
+  rating?: number;
   price: number;
-  reviewsCount: number;
-  date: Date;
+  reviewsCount?: number;
+  date?: Date;
 }

@@ -1,17 +1,25 @@
 export enum AppRoute {
   Root = '/',
   Login = '/login',
-  Favorites = '/favorites',
-  Offer = '/offer/:id',
+  Register = '/register',
+  Catalog = '/catalog',
+  Item = '/item/:id',
+  Cart = '/cart/',
+  AddItem = 'add_item',
+  EditItem = 'edit_item',
+  Items = 'items',
+  Order = 'order',
+  Orders = 'orders',
   NotFoundPage = '/not_found_page'
 }
 
 export enum APIRoute {
-  Offers = '/hotels',
-  Favorites = '/favorite',
+  Items = '/items',
+  Cart = '/cart',
   Login = '/login',
   Logout = '/logout',
-  Reviews = '/comments'
+  Reviews = '/reviews',
+  Orders = '/orders',
 }
 
 export enum AuthorizationStatus {
@@ -34,34 +42,14 @@ export const SORT_TYPES = [
   'Top rated first'
 ];
 
-export const CITIES = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf'
-];
-
 export enum NameSpace {
   Data = 'DATA',
   User = 'USER',
   Sort = 'SORT',
-  City = 'CITY',
+  Item = 'ITEM',
   Error = 'ERROR',
-  Point = 'POINT'
 }
-
-export const URL_MARKER_DEFAULT = 'img/pin.svg';
-
-export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 export const TIMEOUT_SHOW_ERROR = 3000;
 
 export const ONE_STAR_RATING_IN_PERCENT = 20;
-
-export const DEFAULT_OFFER_ID = 0;
-
-export const MOCK_OFFERS_COUNT = 10;
-
-export const MOCK_REVIEWS_COUNT = 10;

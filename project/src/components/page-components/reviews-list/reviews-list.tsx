@@ -1,9 +1,9 @@
-import ReviewItem from '../review-item/review-item';
-import { Review } from '../../../types/user-data.interface';
 import dayjs from 'dayjs';
+import { IReview } from '../../../types/review.interface';
+import ReviewItem from '../review-item/review-item';
 
 type ReviewsListProps = {
-  reviews: Review[];
+  reviews: IReview[];
 };
 
 function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
