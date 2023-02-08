@@ -1,11 +1,11 @@
-import { IUser } from './user.interface';
+import { IUserData } from './user-data.interface';
 
 export interface IReview {
   id?: string;
-  author?: IUser;
+  author?: IUserData;
   advantages: string;
   disadvantages: string;
   comment: string;
-  rating: 1 | 2 | 3 | 4 | 5;
+  rating: number;
   date?: Date;
 }

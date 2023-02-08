@@ -1,7 +1,7 @@
 export interface IUserData {
-  id: number;
+  id?: number;
   name: string;
-  email: string;
-  isAdmin: boolean;
-  token: string;
+  email?: string;
+  isAdmin?: boolean;
+  token?: string;
 }

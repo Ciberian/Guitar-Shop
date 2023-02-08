@@ -53,3 +53,9 @@ export enum NameSpace {
 export const TIMEOUT_SHOW_ERROR = 3000;
 
 export const ONE_STAR_RATING_IN_PERCENT = 20;
+
+export const DEFAULT_ITEM_ID = 0;
+
+export const MOCK_ITEMS_COUNT = 10;
+
+export const MOCK_REVIEWS_COUNT = 10;

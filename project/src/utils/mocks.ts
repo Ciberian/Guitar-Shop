@@ -1,70 +1,47 @@
-import { datatype, name, internet, image, address, random, date } from 'faker';
-import { Offer, Point, Review, UserInfo } from '../types/user-data.interface';
-import { DEFAULT_OFFER_ID, MOCK_OFFERS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
+import { datatype, name, internet, image, random, date } from 'faker';
+import { IItem } from '../types/item.interface';
+import { IReview } from '../types/review.interface';
+import { IUserData } from '../types/user-data.interface';
+import { DEFAULT_ITEM_ID, MOCK_ITEMS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
 
-export const makeFakeUserInfo = (): UserInfo => ({
-  avatarUrl: image.imageUrl(),
-  email: internet.email(),
+export const makeFakeUserInfo = (): IUserData => ({
   id: datatype.number(),
-  isPro: datatype.boolean(),
+  email: internet.email(),
+  isAdmin: datatype.boolean(),
   name: name.firstName(),
   token: datatype.string(),
 });
 
-export const makeFakePointData = (): Point => ({
-  latitude: Number(address.latitude()),
-  longitude: Number(address.longitude()),
-  zoom: datatype.number({ min: 10, max: 13 }),
-});
-
-export const makeFakeOffer = (id: number): Offer => ({
-  city: {
-    name: 'Paris',
-    location: makeFakePointData(),
-  },
-  previewImage: image.imageUrl(),
-  images: new Array(3).fill(null).map(() => image.image()),
-  title: random.word(),
-  isFavorite: datatype.boolean(),
-  isPremium: datatype.boolean(),
-  rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
-  type: random.word(),
-  bedrooms: datatype.number({ min: 1, max: 5 }),
-  maxAdults: datatype.number({ min: 1, max: 5 }),
-  price: datatype.number({ min: 100, max: 1000 }),
-  goods: new Array(3).fill(null).map(() => random.words()),
-  host: {
-    id: datatype.number(),
-    name: name.firstName(),
-    isPro: datatype.boolean(),
-    avatarUrl: image.imageUrl(),
-  },
+export const makeFakeItem = (id: number): IItem => ({
+  id: `${id}`,
+  name: random.words(3),
   description: random.words(15),
-  location: {
-    latitude: Number(address.latitude()),
-    longitude: Number(address.longitude()),
-    zoom: datatype.number({ min: 10, max: 13 }),
-  },
-  id: id,
+  image: image.imageUrl(),
+  type: 'аккустика',
+  code: random.word(),
+  strings: 6,
+  rating: datatype.number({ min: 0, max: 5, precision: 0.1}),
+  price: datatype.number({min: 100, max: 1000}),
+  reviewsCount: datatype.number({min: 0, max: 10}),
+  date: date.recent(),
 });
 
-export const makeFakeReview = (): Review => ({
-  comment: random.words(22),
-  date: String(date.recent()),
-  id: datatype.number(),
-  rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
-  user: {
-    avatarUrl: image.imageUrl(),
-    id: datatype.number(),
-    isPro: datatype.boolean(),
+export const makeFakeReview = (): IReview => ({
+  id: random.word(),
+  author: {
     name: name.firstName(),
   },
+  advantages: random.words(22),
+  disadvantages: random.words(22),
+  comment: random.words(22),
+  rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
+  date: date.recent(),
 });
 
 export const fakeReview = makeFakeReview();
 
-export const fakeOffer = makeFakeOffer(DEFAULT_OFFER_ID);
+export const fakeItem = makeFakeItem(DEFAULT_ITEM_ID);
 
-export const fakeOffers = new Array(MOCK_OFFERS_COUNT).fill(null).map((offer, index) => makeFakeOffer(index));
+export const fakeOffers = new Array(MOCK_ITEMS_COUNT).fill(null).map((_item, index) => makeFakeItem(index));
 
 export const fakeReviews = new Array(MOCK_REVIEWS_COUNT).fill(null).map(() => makeFakeReview());
