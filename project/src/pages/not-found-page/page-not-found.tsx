@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import SiteHeader from '../../../components/page-components/site-header/site-header';
+import SiteHeader from '../../components/page-components/site-header/site-header';
 import './page-not-found.css';
 
 function NotFoundPage(): JSX.Element {

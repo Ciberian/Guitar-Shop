@@ -9,7 +9,7 @@ import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction, changeFavoriteOffersAction } from '../../../store/api-actions';
 import { getLoadedOfferStatus, getOffer, getReviews } from '../../../store/offers-data/selectors';
 
-function OfferPage(): JSX.Element {
+function ItemPage(): JSX.Element {
   const isOfferLoaded = useAppSelector(getLoadedOfferStatus);
 
   const { id } = useParams();
@@ -129,4 +129,4 @@ function OfferPage(): JSX.Element {
   );
 }
 
-export default OfferPage;
+export default ItemPage;

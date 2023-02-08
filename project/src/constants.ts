@@ -1,15 +1,15 @@
 export enum AppRoute {
   Root = '/',
-  Login = '/login',
-  Register = '/register',
   Catalog = '/catalog',
   Item = '/item/:id',
   Cart = '/cart/',
+  Items = 'items',
   AddItem = 'add_item',
   EditItem = 'edit_item',
-  Items = 'items',
-  Order = 'order',
   Orders = 'orders',
+  Order = 'order',
+  Login = '/login',
+  Register = '/register',
   NotFoundPage = '/not_found_page'
 }
 
