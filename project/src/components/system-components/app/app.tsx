@@ -8,23 +8,23 @@ import OrdersPage from '../../../pages/admin/orders-page/orders-page';
 import OrderPage from '../../../pages/admin/order-page/order-page';
 import LoginPage from '../../../pages/auth/login-page/login-page';
 import RegisterPage from '../../../pages/auth/register-page/register-page';
-import NotFoundPage from '../../../pages/not-found-page/page-not-found';
+import NotFoundPage from '../../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import LoadingScreen from '../loading-screen/loading-screen';
+// import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../../hooks';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUserInfo } from '../../../store/user-process/selectors';
-import { getLoadedDataStatus } from '../../../store/offers-data/selectors';
+// import { getLoadedDataStatus } from '../../../store/offers-data/selectors';
 import { AppRoute } from '../../../constants';
 
 function App(): JSX.Element {
   const userData = useAppSelector(getUserInfo);
   const isAdmin = userData?.isAdmin || false;
-  const isDataLoaded = useAppSelector(getLoadedDataStatus);
+  // const isDataLoaded = useAppSelector(getLoadedDataStatus);
 
-  if (!isDataLoaded) {
-    return <LoadingScreen />;
-  }
+  // if (!isDataLoaded) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
     <Routes>

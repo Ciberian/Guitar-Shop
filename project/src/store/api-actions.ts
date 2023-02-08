@@ -8,6 +8,7 @@ import { IAuthData } from '../types/auth-data.interface';
 import { IUserData } from '../types/user-data.interface';
 import { APIRoute } from '../constants';
 import { IOrder } from '../types/order.interface';
+import { IReviewData } from '../types/review-data.interface';
 
 export const fetchItemsAction = createAsyncThunk<
   IItem[],
@@ -96,7 +97,7 @@ export const fetchReviewsAction = createAsyncThunk<
 
 export const fetchNewReviewAction = createAsyncThunk<
   IReview[],
-  IReview & {itemId: number}, {
+  IReviewData & {itemId: number}, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;

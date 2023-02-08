@@ -9,7 +9,7 @@ const MIN_REVIEW_SIMBOLS = 50;
 const MAX_REVIEW_SIMBOLS = 300;
 
 type ReviewFormProps = {
-  id: number;
+  id: string;
 };
 
 function ReviewForm({ id }: ReviewFormProps): JSX.Element {
@@ -47,7 +47,13 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
       method="post"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        dispatch(fetchNewReviewAction({ rating: Number(formData.rating), review: formData.comment, id: id }));
+        dispatch(fetchNewReviewAction({
+          rating: Number(formData.rating),
+          advantages: '',
+          disadvantages: '',
+          comment: formData.comment,
+          itemId: Number(id),
+        }));
         setformData({ rating: '', comment: '' });
       }}
     >

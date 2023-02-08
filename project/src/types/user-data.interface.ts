@@ -3,5 +3,5 @@ export interface IUserData {
   name: string;
   email?: string;
   isAdmin?: boolean;
-  token?: string;
+  token: string;
 }

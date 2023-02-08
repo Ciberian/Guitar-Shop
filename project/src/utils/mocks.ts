@@ -1,7 +1,7 @@
 import { datatype, name, internet, image, random, date } from 'faker';
 import { IItem } from '../types/item.interface';
-import { IReview } from '../types/review.interface';
 import { IUserData } from '../types/user-data.interface';
+import { IReviewData } from '../types/review-data.interface';
 import { DEFAULT_ITEM_ID, MOCK_ITEMS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
 
 export const makeFakeUserInfo = (): IUserData => ({
@@ -26,11 +26,8 @@ export const makeFakeItem = (id: number): IItem => ({
   date: date.recent(),
 });
 
-export const makeFakeReview = (): IReview => ({
-  id: random.word(),
-  author: {
-    name: name.firstName(),
-  },
+export const makeFakeReview = (): IReviewData => ({
+  authorName: name.firstName(),
   advantages: random.words(22),
   disadvantages: random.words(22),
   comment: random.words(22),
