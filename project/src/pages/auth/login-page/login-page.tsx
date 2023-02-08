@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { loginAction } from '../../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
-import { AuthData } from '../../../types/auth-data.interface';
+import { IAuthData } from '../../../types/auth-data.interface';
 
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -20,7 +20,7 @@ function LoginPage(): JSX.Element {
     }
   }, [authorizationStatus, navigate]);
 
-  const onSubmit = (authData: AuthData) => {
+  const onSubmit = (authData: IAuthData) => {
     dispatch(loginAction(authData));
   };
 

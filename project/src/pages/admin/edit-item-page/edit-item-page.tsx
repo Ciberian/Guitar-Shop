@@ -2,7 +2,13 @@ import SiteHeader from '../../../components/page-components/site-header/site-hea
 
 function EditItemPage(): JSX.Element {
   return (
-    <SiteHeader />
+    <>
+      <SiteHeader />
+
+      <main></main>
+
+      <footer></footer>
+    </>
   );
 }
 

@@ -4,25 +4,24 @@ import SiteHeader from '../../../components/page-components/site-header/site-hea
 import ReviewList from '../../../components/page-components/reviews-list/reviews-list';
 import LoadingScreen from '../../../components/system-components/loading-screen/loading-screen';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { AppRoute, AuthorizationStatus, ONE_STAR_RATING_IN_PERCENT } from '../../../constants';
+import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
-import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction, changeFavoriteOffersAction } from '../../../store/api-actions';
-import { getLoadedOfferStatus, getOffer, getReviews } from '../../../store/offers-data/selectors';
+import { fetchItemAction, fetchReviewsAction } from '../../../store/api-actions';
+import { getLoadedItemStatus, getItem, getReviews } from '../../../store/offers-data/selectors';
 
 function ItemPage(): JSX.Element {
-  const isOfferLoaded = useAppSelector(getLoadedOfferStatus);
+  const isOfferLoaded = useAppSelector(getLoadedItemStatus);
 
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
-  const offer = useAppSelector(getOffer);
+  const offer = useAppSelector(getItem);
   const reviews = useAppSelector(getReviews);
 
   useEffect(() => {
-    dispatch(fetchOfferAction(Number(id)));
-    dispatch(fetchNearbyOffersAction(Number(id)));
+    dispatch(fetchItemAction(Number(id)));
     dispatch(fetchReviewsAction(Number(id)));
   }, [id, dispatch]);
 
@@ -41,83 +40,11 @@ function ItemPage(): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <div className="property__gallery"></div>
+            <div className="property__gallery">{isAuthorized}</div>
           </div>
-          <div className="property__container container">
-            <div className="property__wrapper">
-              {offer?.isPremium ? (
-                <div className="property__mark">
-                  <span>Premium</span>
-                </div>
-              ) : (
-                ''
-              )}
-
-              <div className="property__name-wrapper">
-                <h1 className="property__name">{offer?.title}</h1>
-                <button
-                  onClick={() => {
-                    if (offer && isAuthorized) {
-                      dispatch(changeFavoriteOffersAction({ id: offer.id, isFavorite: !offer.isFavorite }));
-                    } else {
-                      navigate(AppRoute.Login);
-                    }
-                  }}
-                  className={`property__bookmark-button
-                    ${offer && offer.isFavorite ? 'property__bookmark-button--active' : ''} button`}
-                  type="button"
-                >
-                  <svg className="place-card__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
-              </div>
-              <div className="property__rating rating">
-                <div className="property__stars rating__stars">
-                  <span style={{ width: `${offer?.rating ? Math.round(offer?.rating) * ONE_STAR_RATING_IN_PERCENT : 0}%` }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="property__rating-value rating__value">{offer?.rating}</span>
-              </div>
-              <ul className="property__features">
-                <li className="property__feature property__feature--entire">{offer?.type ? offer?.type[0].toUpperCase() + offer?.type.substring(1) : ''}</li>
-                <li className="property__feature property__feature--bedrooms">{offer?.bedrooms} Bedrooms</li>
-                <li className="property__feature property__feature--adults">Max {offer?.maxAdults} adults</li>
-              </ul>
-              <div className="property__price">
-                <b className="property__price-value">&euro;{offer?.price}</b>
-                <span className="property__price-text">&nbsp;night</span>
-              </div>
-              <div className="property__inside">
-                <h2 className="property__inside-title">What&apos;s inside</h2>
-              </div>
-              <div className="property__host">
-                <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer?.host.avatarUrl} width="74" height="74" alt="Host avatar" />
-                  </div>
-                  <span className="property__user-name">{offer?.host.name}</span>
-                  {offer?.host.isPro ? <span className="property__user-status">Pro</span> : ''}
-                </div>
-                <div className="property__description">
-                  {offer?.description
-                    .split('.')
-                    .filter((sentence: string) => sentence !== '')
-                    .map((sentence: string) => sentence.replace(/^ +/, ''))
-                    .map((sentence: string) => (
-                      <p className="property__text" key={sentence}>
-                        {`${sentence}.`}
-                      </p>
-                    ))}
-                </div>
-              </div>
-              <section className="property__reviews reviews">
-                {reviews ? <ReviewList reviews={reviews} /> : null}
-              </section>
-            </div>
-          </div>
+        </section>
+        <section className="property__reviews reviews">
+          {reviews ? <ReviewList reviews={reviews} /> : null}
         </section>
         <div className="container">
           <section className="near-places places">

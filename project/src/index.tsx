@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { store } from './store';
-import { Provider } from 'react-redux';
-// import { checkAuthAction, fetchItemsAction } from './store/api-actions';
-import HistoryRouter from './components/system-components/history-router/history-router';
 import ErrorMessage from './components/system-components/error-message/error-message';
+import HistoryRouter from './components/system-components/history-router/history-router';
 import browserHistory from './browser-history';
 import App from './components/system-components/app/app';
+// import { checkAuthAction, fetchItemsAction } from './store/api-actions';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 // store.dispatch(checkAuthAction());
 // store.dispatch(fetchItemsAction());

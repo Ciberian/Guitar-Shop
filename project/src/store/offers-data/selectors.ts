@@ -1,12 +1,13 @@
 import { NameSpace } from '../../constants';
 import { State } from '../../types/state.types';
-import { Offer, Review } from '../../types/user-data.interface';
+import { IItem } from '../../types/item.interface';
+import { IOrder } from '../../types/order.interface';
+import { IReview } from '../../types/review.interface';
 
-export const getOffers = (state: State): Offer[] => state[NameSpace.Data].offers;
-export const getOffer = (state: State): Offer | null => state[NameSpace.Data].offer;
-export const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
-export const getFavoriteOffersCount = (state: State): number => state[NameSpace.Data].favoriteOffers.length;
-export const getReviews = (state: State): Review[] | null => state[NameSpace.Data].reviews;
-export const getNearbyOffers = (state: State): Offer[] | null => state[NameSpace.Data].nearbyOffers;
+export const getItems = (state: State): IItem[] => state[NameSpace.Data].items;
+export const getItem = (state: State): IItem | null => state[NameSpace.Data].item;
+export const getOrders = (state: State): IOrder[] => state[NameSpace.Data].orders;
+export const getOrder = (state: State): IOrder | null => state[NameSpace.Data].order;
+export const getReviews = (state: State): IReview[] | null => state[NameSpace.Data].reviews;
 export const getLoadedDataStatus = (state: State): boolean => state[NameSpace.Data].isDataLoaded;
-export const getLoadedOfferStatus = (state: State): boolean => state[NameSpace.Data].isOfferLoaded;
+export const getLoadedItemStatus = (state: State): boolean => state[NameSpace.Data].isOfferLoaded;

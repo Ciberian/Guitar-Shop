@@ -33,7 +33,7 @@ export const fetchItemAction = createAsyncThunk<
   return data;
 });
 
-export const fetchCartItems = createAsyncThunk<
+export const fetchCartItemsAction = createAsyncThunk<
   IItem[],
   undefined, {
     dispatch: AppDispatch;

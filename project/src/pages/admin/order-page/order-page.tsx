@@ -2,7 +2,13 @@ import SiteHeader from '../../../components/page-components/site-header/site-hea
 
 function OrderPage(): JSX.Element {
   return (
-    <SiteHeader />
+    <>
+      <SiteHeader />
+
+      <main></main>
+
+      <footer></footer>
+    </>
   );
 }
 

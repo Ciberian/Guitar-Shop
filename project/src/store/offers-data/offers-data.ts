@@ -1,24 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants';
-import { OfferData } from '../../types/state.types';
+import { ItemsData } from '../../types/state.types';
 import {
-  fetchOfferAction,
-  fetchOffersAction,
-  fetchFavoriteOffersAction,
-  fetchNearbyOffersAction,
-  changeFavoriteOffersAction,
+  fetchItemsAction,
+  fetchItemAction,
+  fetchCartItemsAction,
+  fetchChangeItemAction,
+  fetchNewItemAction,
+  fetchDeleteItemAction,
   fetchReviewsAction,
   fetchNewReviewAction,
+  fetchOrdersAction,
+  fetchOrderAction,
+  fetchDeleteOrderAction,
 } from '../api-actions';
 
-const initialState: OfferData = {
-  offers: [],
-  offer: null,
-  favoriteOffers: [],
-  nearbyOffers: [],
+const initialState: ItemsData = {
+  items: [],
+  item: null,
+  cartItems: [],
+  orders: [],
+  order: null,
   reviews: null,
   isDataLoaded: false,
-  isOfferLoaded: false,
+  isItemLoaded: false,
+  isOrderLoaded: false,
 };
 
 export const offersData = createSlice({
@@ -27,28 +33,37 @@ export const offersData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchOffersAction.pending, (state) => {
+      .addCase(fetchItemsAction.pending, (state) => {
         state.isDataLoaded = false;
       })
-      .addCase(fetchOffersAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
+      .addCase(fetchItemsAction.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.isDataLoaded = true;
       })
-      .addCase(fetchOffersAction.rejected, (state) => {
+      .addCase(fetchItemsAction.rejected, (state) => {
         state.isDataLoaded = true;
       })
-      .addCase(fetchOfferAction.pending, (state) => {
-        state.isOfferLoaded = false;
+      .addCase(fetchItemAction.pending, (state) => {
+        state.isItemLoaded = false;
       })
-      .addCase(fetchOfferAction.fulfilled, (state, action) => {
-        state.offer = action.payload;
-        state.isOfferLoaded = true;
+      .addCase(fetchItemAction.fulfilled, (state, action) => {
+        state.item = action.payload;
+        state.isItemLoaded = true;
       })
-      .addCase(fetchOfferAction.rejected, (state) => {
-        state.isOfferLoaded = true;
+      .addCase(fetchItemAction.rejected, (state) => {
+        state.isItemLoaded = true;
       })
-      .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
-        state.nearbyOffers = action.payload;
+      .addCase(fetchCartItemsAction.fulfilled, (state, action) => {
+        state.cartItems = action.payload;
+      })
+      .addCase(fetchChangeItemAction.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(fetchNewItemAction.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(fetchDeleteItemAction.fulfilled, (state, action) => {
+        state.items = action.payload;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
@@ -56,27 +71,28 @@ export const offersData = createSlice({
       .addCase(fetchNewReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
-      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
-        state.favoriteOffers = action.payload;
+      .addCase(fetchOrdersAction.pending, (state) => {
+        state.isDataLoaded = false;
       })
-      .addCase(changeFavoriteOffersAction.fulfilled, (state, action) => {
-        const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
-        state.offers = [...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1)];
-
-        if (action.payload.isFavorite && !state.favoriteOffers.find((favoriteOffer) => favoriteOffer.id === action.payload.id)) {
-          state.favoriteOffers = [...state.favoriteOffers, action.payload];
-        } else {
-          state.favoriteOffers = state.favoriteOffers.filter((favoriteOffer) => favoriteOffer.id !== action.payload.id);
-        }
-
-        if (state.nearbyOffers.find((nearbyOffer) => nearbyOffer.id === action.payload.id)) {
-          const nearbyOfferIndex = state.nearbyOffers.findIndex((nearbyOffer) => nearbyOffer.id === action.payload.id);
-          state.nearbyOffers = [...state.nearbyOffers.slice(0, nearbyOfferIndex), action.payload, ...state.nearbyOffers.slice(nearbyOfferIndex + 1)];
-        }
-
-        if (state.offer?.id === action.payload.id) {
-          state.offer = { ...state.offer, isFavorite: !state.offer.isFavorite };
-        }
+      .addCase(fetchOrdersAction.fulfilled, (state, action) => {
+        state.orders = action.payload;
+        state.isDataLoaded = true;
+      })
+      .addCase(fetchOrdersAction.rejected, (state) => {
+        state.isDataLoaded = true;
+      })
+      .addCase(fetchOrderAction.pending, (state) => {
+        state.isOrderLoaded = false;
+      })
+      .addCase(fetchOrderAction.fulfilled, (state, action) => {
+        state.order = action.payload;
+        state.isOrderLoaded = true;
+      })
+      .addCase(fetchOrderAction.rejected, (state) => {
+        state.isOrderLoaded = true;
+      })
+      .addCase(fetchDeleteOrderAction.fulfilled, (state, action) => {
+        state.orders = action.payload;
       });
   },
 });
