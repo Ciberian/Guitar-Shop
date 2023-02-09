@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
 import { getCartItems, getUserInfo } from '../../../store/user-process/selectors';
 import { AppRoute } from '../../../constants';
+import Logo from '../../common/logo/logo';
 
-function SiteHeader() {
+function SiteHeader(): JSX.Element {
   const userInfo = useAppSelector(getUserInfo);
   const cartItems = useAppSelector(getCartItems);
 
@@ -24,9 +25,7 @@ function SiteHeader() {
     <header className={`header ${headerClass}`} id="header">
       <div className="container">
         <div className="header__wrapper">
-          <Link className="header__logo logo" to={AppRoute.Root}>
-            <img className="logo__img" width="70" height="70" src="./img/svg/logo.svg" alt="Логотип" />
-          </Link>
+          <Logo logoPlace='header__logo' />
           <nav className="main-nav">
             <ul className="main-nav__list">
               <li className="main-nav__item">
