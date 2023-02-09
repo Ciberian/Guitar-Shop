@@ -48,8 +48,11 @@ function SiteHeader() {
           </nav>
           <div className="header__container">
             <span className="header__user-name">{userInfo?.name}</span>
-            <Link className="header__link" to={userInfo ? AppRoute.Login : AppRoute.NotFoundPage} aria-label="Перейти в личный кабинет">
-              {/* Вместо NotFountPage должен быть переход на страницу с Личным кабинетом ↑↑↑ (но страницы с Личным кабинетом нет, поэтому так) */}
+            <Link
+              className="header__link"
+              to={userInfo ? AppRoute.MyAccount : AppRoute.Login}
+              aria-label="Перейти в личный кабинет"
+            >
               <svg className="header__link-icon" width="12" height="14" aria-hidden="true">
                 <use xlinkHref="#icon-account"></use>
               </svg>

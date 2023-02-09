@@ -1,38 +1,47 @@
-export enum AppRoute {
-  Root = '/',
-  Catalog = '/catalog',
-  Item = '/item/:id',
-  Cart = '/cart/',
-  Items = 'items',
-  AddItem = 'add_item',
-  EditItem = 'edit_item',
-  Orders = 'orders',
-  Order = 'order',
-  Login = '/login',
-  Register = '/register',
-  NotFoundPage = '/not_found_page'
-}
+export const AppRoute = {
+  Root: '/',
+  Catalog: '/catalog',
+  Item: '/item/:id',
+  Cart: '/cart/',
+  Items: 'items',
+  AddItem: 'add_item',
+  EditItem: 'edit_item',
+  Orders: 'orders',
+  Order: 'order',
+  Login: '/login',
+  Register: '/register',
+  NotFoundPage: '/not_found_page',
+  MyAccount: '/my_account'
+} as const;
 
-export enum APIRoute {
-  Items = '/items',
-  Cart = '/cart',
-  Login = '/login',
-  Logout = '/logout',
-  Reviews = '/reviews',
-  Orders = '/orders',
-}
+export const APIRoute = {
+  Items: '/items',
+  Cart: '/cart',
+  Login: '/login',
+  Logout: '/logout',
+  Reviews: '/reviews',
+  Orders: '/orders',
+} as const;
+
+export const SortType = {
+  Popular: 'Popular',
+  PriceToHigh: 'Price: low to high',
+  PriceToLow: 'Price: high to low',
+  TopRated: 'Top rated first'
+} as const;
+
+export const NameSpace = {
+  Data: 'DATA',
+  User: 'USER',
+  Sort: 'SORT',
+  Item: 'ITEM',
+  Error: 'ERROR',
+} as const;
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
-}
-
-export enum SortType {
-  Popular = 'Popular',
-  PriceToHigh = 'Price: low to high',
-  PriceToLow = 'Price: high to low',
-  TopRated = 'Top rated first'
 }
 
 export const SORT_TYPES = [
@@ -42,13 +51,6 @@ export const SORT_TYPES = [
   'Top rated first'
 ];
 
-export enum NameSpace {
-  Data = 'DATA',
-  User = 'USER',
-  Sort = 'SORT',
-  Item = 'ITEM',
-  Error = 'ERROR',
-}
 
 export const TIMEOUT_SHOW_ERROR = 3000;
 
