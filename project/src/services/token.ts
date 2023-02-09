@@ -1,4 +1,4 @@
-const AUTH_TOKEN_KEY_NAME = 'guitar-store-token';
+const AUTH_TOKEN_KEY_NAME = 'guitar-shop-token';
 
 export type Token = string;
 

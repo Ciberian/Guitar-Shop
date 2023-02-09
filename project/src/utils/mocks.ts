@@ -39,6 +39,6 @@ export const fakeReview = makeFakeReview();
 
 export const fakeItem = makeFakeItem(DEFAULT_ITEM_ID);
 
-export const fakeOffers = new Array(MOCK_ITEMS_COUNT).fill(null).map((_item, index) => makeFakeItem(index));
+export const fakeItems = new Array(MOCK_ITEMS_COUNT).fill(null).map((_item, index) => makeFakeItem(index));
 
 export const fakeReviews = new Array(MOCK_REVIEWS_COUNT).fill(null).map(() => makeFakeReview());

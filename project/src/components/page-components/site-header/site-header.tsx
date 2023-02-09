@@ -1,48 +1,67 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../../hooks';
-import { getUserInfo } from '../../../store/user-process/selectors';
-import { logoutAction } from '../../../store/api-actions';
+import { useAppSelector } from '../../../hooks';
+import { getCartItems, getUserInfo } from '../../../store/user-process/selectors';
 import { AppRoute } from '../../../constants';
 
 function SiteHeader() {
   const userInfo = useAppSelector(getUserInfo);
-  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector(getCartItems);
 
-  const handleSignOut = (evt: { preventDefault: () => void }) => {
-    evt.preventDefault();
-    dispatch(logoutAction());
-  };
+  let headerClass = '';
+  if (userInfo?.isAdmin) {
+    headerClass = 'header--admin';
+  } else {
+    if (userInfo && cartItems.length !== 0) {
+      headerClass = 'header--logged';
+    }
+
+    if (userInfo && cartItems.length === 0) {
+      headerClass = 'header--logged-empty';
+    }
+  }
 
   return (
-    <header className="header">
+    <header className={`header ${headerClass}`} id="header">
       <div className="container">
         <div className="header__wrapper">
-          <div className="header__left">
-            <Link className="header__logo-link header__logo-link--active" to="/">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-            </Link>
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              {userInfo ? (
-                <>
-                  <li className="header__nav-item user">
-                  </li>
-                  <li className="header__nav-item">
-                    <a className="header__nav-link" onClick={handleSignOut} href="\#">
-                      <span className="header__signout">Sign out</span>
-                    </a>
-                  </li>
-                </>
-              ) : (
-                <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Login}>
-                    <span className="header__signout">Sign in</span>
-                  </Link>
-                </li>
-              )}
+          <Link className="header__logo logo" to={AppRoute.Root}>
+            <img className="logo__img" width="70" height="70" src="./img/svg/logo.svg" alt="Логотип" />
+          </Link>
+          <nav className="main-nav">
+            <ul className="main-nav__list">
+              <li className="main-nav__item">
+                <Link className="link main-nav__link" to={AppRoute.Catalog}>
+                  Каталог
+                </Link>
+              </li>
+              <li className="main-nav__item">
+                <Link className="link main-nav__link" to={AppRoute.NotFoundPage}>
+                  Где купить?
+                </Link>
+              </li>
+              <li className="main-nav__item">
+                <Link className="link main-nav__link" to={AppRoute.NotFoundPage}>
+                  О компании
+                </Link>
+              </li>
             </ul>
           </nav>
+          <div className="header__container">
+            <span className="header__user-name">{userInfo?.name}</span>
+            <Link className="header__link" to={userInfo ? AppRoute.Login : AppRoute.NotFoundPage} aria-label="Перейти в личный кабинет">
+              {/* Вместо NotFountPage должен быть переход на страницу с Личным кабинетом ↑↑↑ (но страницы с Личным кабинетом нет, поэтому так) */}
+              <svg className="header__link-icon" width="12" height="14" aria-hidden="true">
+                <use xlinkHref="#icon-account"></use>
+              </svg>
+              <span className="header__link-text">Вход</span>
+            </Link>
+            <Link className="header__cart-link" to={AppRoute.Cart} aria-label="Перейти в корзину">
+              <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
+                <use xlinkHref="#icon-basket"></use>
+              </svg>
+              <span className="header__cart-count">{cartItems.length}</span>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
