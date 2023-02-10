@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
 interface ISocialsProps {
-  socialsPlace: string;
+  extraСlass: string;
 }
 
-function Socials({socialsPlace}: ISocialsProps): JSX.Element {
+function Socials({extraСlass}: ISocialsProps): JSX.Element {
   return (
-    <div className={`socials ${socialsPlace}`}>
+    <div className={`socials ${extraСlass}`}>
       <ul className="socials__list">
         <li className="socials-item">
           <Link className="socials__link" to="https://www.skype.com/" aria-label="Мы в skype">

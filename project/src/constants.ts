@@ -54,7 +54,19 @@ export const SORT_TYPES = [
 
 export const TIMEOUT_SHOW_ERROR = 3000;
 
-export const ONE_STAR_RATING_IN_PERCENT = 20;
+export const RATINGS = [1, 2, 3, 4, 5];
+
+export const MAX_REVIEW_RATING = 5;
+
+export const MIN_REVIEW_RATING = 1;
+
+export const RATING_TITLES = [
+  'Ужасно',
+  'Плохо',
+  'Нормально',
+  'Хорошо',
+  'Отлично'
+];
 
 export const DEFAULT_ITEM_ID = 0;
 

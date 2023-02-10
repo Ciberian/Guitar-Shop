@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../../hooks';
 import { fetchNewReviewAction } from '../../../store/api-actions';
-import ReviewRating from '../../common/review-rating/review-rating';
+import ReviewRating from '../../form-elements/form-rating/form-rating';
 
 const MAX_REVIEW_RATING = 5;
 const MIN_REVIEW_RATING = 1;
@@ -34,7 +34,7 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
     const reviewRating: JSX.Element[] = [];
 
     for (let i = MAX_REVIEW_RATING; i >= MIN_REVIEW_RATING; i--) {
-      reviewRating.push(<ReviewRating starNumber={i} rating={formData.rating} ratingChangeHandler={formDataChangeHandler} key={`key-${i}`} />);
+      reviewRating.push(<ReviewRating ratingChangeHandler={formDataChangeHandler} key={`key-${i}`} />);
     }
 
     return reviewRating;

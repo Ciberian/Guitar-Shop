@@ -8,8 +8,8 @@ function SiteFooter(): JSX.Element {
       <div className="container">
         <div className="footer__container">
           <div className="footer__logo-wrapper">
-            <Logo logoPlace='footer__logo'/>
-            <Socials socialsPlace='footer__socials'/>
+            <Logo extraСlass='footer__logo'/>
+            <Socials extraСlass='footer__socials'/>
           </div>
           <section className="footer__nav-section footer__nav-section--about">
             <h2 className="footer__nav-title footer__nav-title--about">О нас</h2>

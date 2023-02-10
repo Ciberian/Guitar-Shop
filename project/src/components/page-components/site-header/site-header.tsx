@@ -26,7 +26,7 @@ function SiteHeader(): JSX.Element {
     <header className={`header ${headerClass}`} id="header">
       <div className="container">
         <div className="header__wrapper">
-          <Logo logoPlace='header__logo' />
+          <Logo extraСlass='header__logo' />
           <nav className="main-nav">
             <ul className="main-nav__list">
               <li className="main-nav__item">

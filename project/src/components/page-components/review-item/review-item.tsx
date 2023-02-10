@@ -1,13 +1,12 @@
 import dayjs from 'dayjs';
 import { IReview } from '../../../types/review.interface';
-import { ONE_STAR_RATING_IN_PERCENT } from '../../../constants';
 
 type ReviewItemProps = {
   review: IReview;
 };
 
 function ReviewItem({ review }: ReviewItemProps): JSX.Element {
-  const { author, rating, comment, date } = review;
+  const { author, comment, date } = review;
   const formattedDate = dayjs(date).format('MMMM YYYY');
 
   return (
@@ -21,7 +20,6 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${rating * ONE_STAR_RATING_IN_PERCENT}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
