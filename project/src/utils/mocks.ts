@@ -13,7 +13,7 @@ export const makeFakeUserInfo = (): IUserData => ({
 });
 
 export const makeFakeItem = (id: number): IItem => ({
-  id: `${id}`,
+  id: id,
   name: random.words(3),
   description: random.words(15),
   image: image.imageUrl(),

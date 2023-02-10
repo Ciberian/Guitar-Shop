@@ -1,17 +1,17 @@
 export const AppRoute = {
   Root: '/',
-  Catalog: '/catalog',
-  Item: '/item/:id',
-  Cart: '/cart/',
-  Items: 'items',
-  AddItem: 'add_item',
-  EditItem: 'edit_item',
-  Orders: 'orders',
-  Order: 'order',
-  Login: '/login',
-  Register: '/register',
-  NotFoundPage: '/not_found_page',
-  MyAccount: '/my_account'
+  Catalog: 'catalog',
+  Item: 'catalog/item/:id',
+  Cart: 'catalog/cart/',
+  Items: 'items/',
+  AddItem: 'items/add_item',
+  EditItem: 'items/edit_item/:id',
+  Orders: 'orders/',
+  Order: 'orders/order/:id',
+  Login: 'login',
+  Register: 'register',
+  NotFoundPage: 'not_found_page',
+  MyAccount: 'my_account'
 } as const;
 
 export const APIRoute = {

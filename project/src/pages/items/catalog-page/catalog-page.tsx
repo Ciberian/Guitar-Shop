@@ -5,9 +5,10 @@ function CatalogPage(): JSX.Element {
   return (
     <>
       <SiteHeader />
-
-      <main></main>
-
+      <hr />
+      <main>
+      </main>
+      <hr />
       <SiteFooter />
     </>
   );

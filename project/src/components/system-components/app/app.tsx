@@ -76,7 +76,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route path={AppRoute.Register} element={<RegisterPage />} />
         <Route path={AppRoute.NotFoundPage} element={<NotFoundPage />} />
-        <Route path={AppRoute.MyAccount} element={<NotFoundPage />} /> {/* Страницы с MyAccount(Личный кабинет) тоже нет, поэтому NotFoundPage */}
+        <Route path={AppRoute.MyAccount} element={<NotFoundPage />} /> {/* Страницы с MyAccount(Личный кабинет) тоже нет, поэтому вместо неё NotFoundPage */}
         <Route path="*" element={<Navigate to={AppRoute.NotFoundPage} />} />
       </Route>
     </Routes>

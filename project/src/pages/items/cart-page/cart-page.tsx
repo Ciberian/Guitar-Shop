@@ -1,15 +1,17 @@
+import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 
-function FavoritesPage(): JSX.Element {
+function CartPage(): JSX.Element {
   return (
     <>
       <SiteHeader />
 
-      <main></main>
+      <main>
+      </main>
 
-      <footer></footer>
+      <SiteFooter />
     </>
   );
 }
 
-export default FavoritesPage;
+export default CartPage;

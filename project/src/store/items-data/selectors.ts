@@ -6,6 +6,7 @@ import { IReview } from '../../types/review.interface';
 
 export const getItems = (state: State): IItem[] => state[NameSpace.Data].items;
 export const getItem = (state: State): IItem | null => state[NameSpace.Data].item;
+export const getCartItems = (state: State): IItem[] => state[NameSpace.Data].cartItems;
 export const getOrders = (state: State): IOrder[] => state[NameSpace.Data].orders;
 export const getOrder = (state: State): IOrder | null => state[NameSpace.Data].order;
 export const getReviews = (state: State): IReview[] | null => state[NameSpace.Data].reviews;

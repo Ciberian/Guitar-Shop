@@ -7,7 +7,7 @@ type IOrderedItems = {
 };
 
 export interface IOrder {
-  id: string;
+  id: number;
   items: IOrderedItems[];
   totalItems: number;
   totalPrice: number;

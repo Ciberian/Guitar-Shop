@@ -27,7 +27,7 @@ const initialState: ItemsData = {
   isOrderLoaded: false,
 };
 
-export const offersData = createSlice({
+export const itemsData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {},

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 import { fetchItemAction, fetchReviewsAction } from '../../../store/api-actions';
-import { getLoadedItemStatus, getItem, getReviews } from '../../../store/offers-data/selectors';
+import { getLoadedItemStatus, getItem, getReviews } from '../../../store/items-data/selectors';
 
 function ItemPage(): JSX.Element {
   const isOfferLoaded = useAppSelector(getLoadedItemStatus);
@@ -43,9 +43,7 @@ function ItemPage(): JSX.Element {
             <div className="property__gallery">{isAuthorized}</div>
           </div>
         </section>
-        <section className="property__reviews reviews">
-          {reviews ? <ReviewList reviews={reviews} /> : null}
-        </section>
+        <section className="property__reviews reviews">{reviews ? <ReviewList reviews={reviews} /> : null}</section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
-import { getCartItems, getUserInfo } from '../../../store/user-process/selectors';
+import { getUserInfo } from '../../../store/user-process/selectors';
+import { getCartItems } from '../../../store/items-data/selectors';
 import { AppRoute } from '../../../constants';
 import Logo from '../../common/logo/logo';
 
