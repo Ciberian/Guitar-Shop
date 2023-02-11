@@ -1,15 +1,15 @@
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import StringsQuantitySelector from '../../../components/form-elements/strings-quantity-selector/strings-quantity-selector';
 import { ChangeEvent } from 'react';
+import Checkbox from '../../../components/form-elements/checkbox/checkbox';
 
 function CatalogPage(): JSX.Element {
-  const formDataChangeHandler = ({ target }: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = target;
+  const formDataChangeHandler = ({target}: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = target;
     // eslint-disable-next-line no-console
     console.log(name);
     // eslint-disable-next-line no-console
-    console.log(value);
+    console.log(checked);
   };
 
   return (
@@ -17,7 +17,11 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '380px', margin: '40px auto'}}>
-          <StringsQuantitySelector extraClass='add-item__form-radio' stringsQuantityChangeHandler={formDataChangeHandler}/>
+          <Checkbox
+            name='electric'
+            label='Электрогитары'
+            checkboxChangeHandler={formDataChangeHandler}
+          />
         </div>
       </main>
       <SiteFooter />
