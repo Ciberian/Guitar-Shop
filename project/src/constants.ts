@@ -57,9 +57,6 @@ export const SORT_TYPES = [
   'Top rated first'
 ];
 
-
-export const TIMEOUT_SHOW_ERROR = 3000;
-
 export const RATINGS = [1, 2, 3, 4, 5];
 
 export const MAX_REVIEW_RATING = 5;
@@ -73,6 +70,28 @@ export const RATING_TITLES = [
   'Хорошо',
   'Отлично'
 ];
+
+export const BTN_SIZES = [
+  'button--mini',
+  'button--small',
+  'button--medium',
+  'button--big'
+] as const;
+
+export const BTN_TYPES = [
+  'button--in-cart',
+  'button--add-to-cart',
+  'button--up',
+  'edit-item-image__btn'
+] as const;
+
+export const BTN_STYLES = [
+  'button--red-border',
+  'button--black-border',
+  'button--red'
+] as const;
+
+export const TIMEOUT_SHOW_ERROR = 3000;
 
 export const DEFAULT_ITEM_ID = 0;
 

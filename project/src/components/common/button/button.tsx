@@ -1,15 +1,16 @@
 import { ReactNode } from 'react';
+import { BtnSizes, BtnStyles, BtnTypes } from '../../../types/common.types';
 
 interface IButtonProps {
-  size?: 'button--mini' | 'button--small' | 'button--medium' | 'button--big';
-  type?: 'button--in-cart' | 'button--add-to-cart' | 'button--up';
-  btnStyle?: 'button--red-border' | 'button--black-border' | 'button--red';
+  btnSize?: BtnSizes;
+  btnType?: BtnTypes;
+  btnStyle?: BtnStyles;
   children?: ReactNode;
 }
 
-function Button({size = 'button--big', type, btnStyle, children}: IButtonProps): JSX.Element {
+function Button({btnSize = 'button--big', btnType, btnStyle, children}: IButtonProps): JSX.Element {
   return (
-    <button className={`button ${size} ${type} ${btnStyle}`}>
+    <button className={`button ${btnSize} ${btnType} ${btnStyle}`}>
       {children}
     </button>
   );
