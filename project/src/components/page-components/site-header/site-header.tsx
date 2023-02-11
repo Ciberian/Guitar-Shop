@@ -35,13 +35,13 @@ function SiteHeader(): JSX.Element {
                 </Link>
               </li>
               <li className="main-nav__item">
-                <Link className="link main-nav__link" to={AppRoute.NotFoundPage}>
-                  Где купить?
+                <Link className="link main-nav__link" to={AppRoute.Orders}>
+                  {userInfo?.isAdmin ? 'Список заказов' : 'Где купить?'}
                 </Link>
               </li>
               <li className="main-nav__item">
-                <Link className="link main-nav__link" to={AppRoute.NotFoundPage}>
-                  О компании
+                <Link className="link main-nav__link" to={AppRoute.Items}>
+                  {userInfo?.isAdmin ? 'Список товаров' : 'О компании'}
                 </Link>
               </li>
             </ul>
