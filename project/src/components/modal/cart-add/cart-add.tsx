@@ -1,4 +1,4 @@
-import { GuitarType } from '../../../types/common.types';
+import { GuitarType } from '../../../constants';
 import { IItem } from '../../../types/item.interface';
 
 interface ICartAddProps {

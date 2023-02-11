@@ -38,6 +38,12 @@ export const NameSpace = {
   Error: 'ERROR',
 } as const;
 
+export const GuitarType = {
+  'электро': 'Электрогитара',
+  'аккустика': 'Акустическая гитара',
+  'укулеле': 'Укулеле',
+} as const;
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

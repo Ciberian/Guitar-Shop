@@ -1,6 +1,7 @@
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import Tabs from '../../../components/common/tabs/tabs';
+import { fakeItem } from '../../../utils/mocks';
 
 function CatalogPage(): JSX.Element {
 
@@ -8,8 +9,8 @@ function CatalogPage(): JSX.Element {
     <>
       <SiteHeader />
       <main className='page-content'>
-        <div style={{width: '380px', margin: '0 auto'}}>
-          <Tabs />
+        <div style={{width: '380px', margin: '40px auto'}}>
+          <Tabs item={fakeItem}/>
         </div>
       </main>
       <SiteFooter />

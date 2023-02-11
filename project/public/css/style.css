@@ -3418,6 +3418,7 @@ button,
   min-width: 190px;
   padding-right: 26px;
   padding-left: 26px;
+  cursor: pointer;
 }
 
 .cart-item {

@@ -1,22 +1,26 @@
 import { useState } from 'react';
+import { IItem } from '../../../types/item.interface';
+import { GuitarType } from '../../../constants';
 
 interface ITabsProps {
   extraСlass?: string;
+  item: IItem;
 }
 
-function Tabs({extraСlass}: ITabsProps): JSX.Element {
+function Tabs({extraСlass, item}: ITabsProps): JSX.Element {
+  const {code, type, strings, description} = item;
   const [activeTab, setActiveTab] = useState('description');
 
   return (
     <div className={`tabs ${extraСlass}`}>
       <button
-        className={`button button--medium tabs__button ${activeTab === 'characteristics' ? 'button--black-border' : ''}`}
+        className={`button button--medium tabs__button ${activeTab === 'description' ? 'button--black-border' : ''}`}
         onClick={() => setActiveTab('characteristics')}
       >
         Характеристики
       </button>
       <button
-        className={`button button--medium tabs__button ${activeTab === 'description' ? 'button--black-border' : ''}`}
+        className={`button button--medium tabs__button ${activeTab === 'characteristics' ? 'button--black-border' : ''}`}
         onClick={() => setActiveTab('description')}
       >
         Описание
@@ -26,19 +30,19 @@ function Tabs({extraСlass}: ITabsProps): JSX.Element {
           <tbody>
             <tr className="tabs__table-row">
               <td className="tabs__title">Артикул:</td>
-              <td className="tabs__value">SO754565</td>
+              <td className="tabs__value">{code}</td>
             </tr>
             <tr className="tabs__table-row">
               <td className="tabs__title">Тип:</td>
-              <td className="tabs__value">Электрогитара</td>
+              <td className="tabs__value">{GuitarType[type]}</td>
             </tr>
             <tr className="tabs__table-row">
               <td className="tabs__title">Количество струн:</td>
-              <td className="tabs__value">6 струнная</td>
+              <td className="tabs__value">{strings} струнная</td>
             </tr>
           </tbody>
         </table>
-        <p className={`tabs__product-description ${activeTab === 'characteristics' ? 'hidden' : ''}`}>Гитара подходит как для старта обучения, так и для домашних занятий или использования в полевых условиях, например, в походах или для проведения уличных выступлений. Доступная стоимость, качество и надежная конструкция, а также приятный внешний вид, который сделает вас звездой вечеринки.</p>
+        <p className={`tabs__product-description ${activeTab === 'characteristics' ? 'hidden' : ''}`}>{description}</p>
       </div>
     </div>
   );
