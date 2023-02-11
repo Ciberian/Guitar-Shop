@@ -7,6 +7,7 @@ function CartPage(): JSX.Element {
       <SiteHeader />
 
       <main>
+        <h1>Cart Page</h1>
       </main>
 
       <SiteFooter />

@@ -1,5 +1,5 @@
 interface ICrossBtnProps {
-  extraСlass: string;
+  extraСlass?: string;
 }
 
 function CrossBtn({extraСlass}: ICrossBtnProps): JSX.Element {
