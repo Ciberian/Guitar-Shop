@@ -18,11 +18,11 @@ export const makeFakeItem = (id: number): IItem => ({
   description: random.words(15),
   image: image.imageUrl(),
   type: 'аккустика',
-  code: random.word(),
+  sku: random.word(),
   strings: 6,
-  rating: datatype.number({ min: 0, max: 5, precision: 0.1}),
-  price: datatype.number({min: 100, max: 1000}),
-  reviewsCount: datatype.number({min: 0, max: 10}),
+  rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
+  price: datatype.number({ min: 100, max: 1000 }),
+  reviewsCount: datatype.number({ min: 0, max: 10 }),
   date: date.recent(),
 });
 

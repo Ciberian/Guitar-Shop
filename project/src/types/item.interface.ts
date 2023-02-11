@@ -4,7 +4,7 @@ export interface IItem {
   description: string;
   image: string;
   type: 'электро' | 'аккустика' | 'укулеле';
-  code: string;
+  sku: string;
   strings: 4 | 6 | 7 | 12;
   rating?: number;
   price: number;

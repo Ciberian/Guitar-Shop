@@ -7,8 +7,8 @@ interface ITabsProps {
   item: IItem;
 }
 
-function Tabs({extraСlass, item}: ITabsProps): JSX.Element {
-  const {code, type, strings, description} = item;
+function Tabs({ extraСlass, item }: ITabsProps): JSX.Element {
+  const { sku, type, strings, description } = item;
   const [activeTab, setActiveTab] = useState('description');
 
   return (
@@ -30,7 +30,7 @@ function Tabs({extraСlass, item}: ITabsProps): JSX.Element {
           <tbody>
             <tr className="tabs__table-row">
               <td className="tabs__title">Артикул:</td>
-              <td className="tabs__value">{code}</td>
+              <td className="tabs__value">{sku}</td>
             </tr>
             <tr className="tabs__table-row">
               <td className="tabs__title">Тип:</td>
