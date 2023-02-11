@@ -1,11 +1,11 @@
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import { ChangeEvent, useState } from 'react';
-import CustomInput from '../../../components/form-elements/custom-input/custom-input';
+import CustomTextarea from '../../../components/form-elements/custom-textarea/custom-textarea';
 
 function CatalogPage(): JSX.Element {
   const [inputValue, setInputValue] = useState('');
-  const formDataChangeHandler = ({target}: ChangeEvent<HTMLInputElement>) => {
+  const formDataChangeHandler = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
     const { name } = target;
     setInputValue(target.value);
     // eslint-disable-next-line no-console
@@ -17,10 +17,8 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <CustomInput
-            name='title'
-            label='Наименование товара'
-            placeholder='Наименование'
+          <CustomTextarea
+            label='Описание товара'
             value={inputValue}
             inputValueChangeHandler={formDataChangeHandler}
           />
