@@ -3,7 +3,7 @@ interface IStringsCountSelectorProps {
   stringsQuantityChangeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function StringsQuantitySelector({extraClass, stringsQuantityChangeHandler}: IStringsCountSelectorProps):JSX.Element {
+function StringsQuantitySelector({extraClass = '', stringsQuantityChangeHandler}: IStringsCountSelectorProps):JSX.Element {
   return (
     <div className={`input-radio ${extraClass}`}><span>Количество струн</span>
       <input onChange={stringsQuantityChangeHandler} type="radio" id="string-qty-4" name="string-qty" value="4" defaultChecked />

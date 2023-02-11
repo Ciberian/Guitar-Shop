@@ -5,7 +5,7 @@ interface IFormRatingProps {
   ratingChangeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function FormRating({extraClass, ratingChangeHandler}: IFormRatingProps):JSX.Element {
+function FormRating({extraClass = '', ratingChangeHandler}: IFormRatingProps):JSX.Element {
   const rating: JSX.Element[] = [];
 
   for (let i = MAX_REVIEW_RATING; i >= MIN_REVIEW_RATING; i--) {

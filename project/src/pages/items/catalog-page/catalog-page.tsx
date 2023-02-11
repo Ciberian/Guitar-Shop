@@ -1,26 +1,28 @@
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import { ChangeEvent } from 'react';
-import Checkbox from '../../../components/form-elements/checkbox/checkbox';
+import { ChangeEvent, useState } from 'react';
+import CustomInput from '../../../components/form-elements/custom-input/custom-input';
 
 function CatalogPage(): JSX.Element {
+  const [inputValue, setInputValue] = useState('');
   const formDataChangeHandler = ({target}: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = target;
+    const { name } = target;
+    setInputValue(target.value);
     // eslint-disable-next-line no-console
     console.log(name);
-    // eslint-disable-next-line no-console
-    console.log(checked);
   };
 
   return (
     <>
       <SiteHeader />
       <main className='page-content'>
-        <div style={{width: '380px', margin: '40px auto'}}>
-          <Checkbox
-            name='electric'
-            label='Электрогитары'
-            checkboxChangeHandler={formDataChangeHandler}
+        <div style={{width: '390px', margin: '40px auto'}}>
+          <CustomInput
+            name='title'
+            label='Наименование товара'
+            placeholder='Наименование'
+            value={inputValue}
+            inputValueChangeHandler={formDataChangeHandler}
           />
         </div>
       </main>

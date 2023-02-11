@@ -3,7 +3,7 @@ interface IGuitarTypeSelectorProps {
   guitarTypeChangeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function GuitarTypeSelector({extraClass, guitarTypeChangeHandler}: IGuitarTypeSelectorProps):JSX.Element {
+function GuitarTypeSelector({extraClass = '', guitarTypeChangeHandler}: IGuitarTypeSelectorProps):JSX.Element {
   return (
     <div className={`input-radio ${extraClass}`}><span>Тип товара</span>
       <input onChange={guitarTypeChangeHandler} type="radio" id="guitar" name="item-type" value="guitar" defaultChecked />
