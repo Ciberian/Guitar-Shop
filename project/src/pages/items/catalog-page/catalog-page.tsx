@@ -1,11 +1,14 @@
+/* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import EditItemImage from '../../../components/form-elements/edit-item-image/edit-item-image';
+import CartAdd from '../../../components/modal/cart-add/cart-add';
+import { makeFakeItem } from '../../../utils/mocks';
+import { DEFAULT_ITEM_ID } from '../../../constants';
+import { IItem } from '../../../types/item.interface';
 
 function CatalogPage(): JSX.Element {
-  const formDataChangeHandler = (imgFile: FileList | null) => {
-    // eslint-disable-next-line no-console
-    console.log(imgFile);
+  const addItemToCartHandler = (item: IItem) => {
+    console.log('New item in cart - ', item);
   };
 
   return (
@@ -13,7 +16,11 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <EditItemImage imageChangeHandler={formDataChangeHandler}/>
+          <CartAdd
+            modalTitle='Добавить товар в корзину'
+            item={makeFakeItem(DEFAULT_ITEM_ID, 67, 137)}
+            addToCartHandler={addItemToCartHandler}
+          />
         </div>
       </main>
       <SiteFooter />

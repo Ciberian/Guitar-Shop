@@ -1,8 +1,9 @@
-import { datatype, name, internet, image, random, date } from 'faker';
+import { datatype, name, internet, random, date } from 'faker';
 import { IItem } from '../types/item.interface';
 import { IUserData } from '../types/user-data.interface';
 import { IReviewData } from '../types/review-data.interface';
-import { DEFAULT_ITEM_ID, MOCK_ITEMS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
+import { MAX_IMG_ID, MIN_IMG_ID, MOCK_ITEMS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
+import { getRandomInt } from './helpers';
 
 export const makeFakeUserInfo = (): IUserData => ({
   id: datatype.number(),
@@ -12,11 +13,11 @@ export const makeFakeUserInfo = (): IUserData => ({
   token: datatype.string(),
 });
 
-export const makeFakeItem = (id: number): IItem => ({
+export const makeFakeItem = (id: number, imgWidth: number, imgHeight: number): IItem => ({
   id: id,
   name: random.words(3),
   description: random.words(15),
-  image: image.imageUrl(),
+  image: `https://picsum.photos/id/${getRandomInt(MIN_IMG_ID, MAX_IMG_ID)}/${imgWidth}/${imgHeight}`,
   type: 'аккустика',
   sku: random.word(),
   strings: 6,
@@ -35,10 +36,10 @@ export const makeFakeReview = (): IReviewData => ({
   date: date.recent(),
 });
 
-export const fakeReview = makeFakeReview();
+export const makeFakeItems = (imgWidth: number, imgHeight: number) => (
+  new Array(MOCK_ITEMS_COUNT).fill(null).map((_item, index) => makeFakeItem(index, imgWidth, imgHeight))
+);
 
-export const fakeItem = makeFakeItem(DEFAULT_ITEM_ID);
-
-export const fakeItems = new Array(MOCK_ITEMS_COUNT).fill(null).map((_item, index) => makeFakeItem(index));
-
-export const fakeReviews = new Array(MOCK_REVIEWS_COUNT).fill(null).map(() => makeFakeReview());
+export const makeFakeReviews = () => (
+  new Array(MOCK_REVIEWS_COUNT).fill(null).map(() => makeFakeReview())
+);

@@ -98,3 +98,7 @@ export const DEFAULT_ITEM_ID = 0;
 export const MOCK_ITEMS_COUNT = 10;
 
 export const MOCK_REVIEWS_COUNT = 10;
+
+export const MAX_IMG_ID = 100;
+
+export const MIN_IMG_ID = 1;
