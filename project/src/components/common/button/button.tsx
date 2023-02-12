@@ -6,11 +6,12 @@ interface IButtonProps {
   btnType?: BtnTypes;
   btnStyle?: BtnStyles;
   children?: ReactNode;
+  btnClickHandler?: () => void;
 }
 
-function Button({btnSize = 'button--big', btnType, btnStyle, children}: IButtonProps): JSX.Element {
+function Button({btnSize = 'button--big', btnType, btnStyle, children, btnClickHandler}: IButtonProps): JSX.Element {
   return (
-    <button className={`button ${btnSize} ${btnType} ${btnStyle}`}>
+    <button onClick={btnClickHandler} className={`button ${btnSize} ${btnType} ${btnStyle}`}>
       {children}
     </button>
   );
