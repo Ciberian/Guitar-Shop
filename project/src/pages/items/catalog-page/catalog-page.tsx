@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import CartAdd from '../../../components/modal/cart-add/cart-add';
+import CartDelete from '../../../components/modal/cart-delete/cart-delete';
 import { makeFakeItem } from '../../../utils/mocks';
 import { DEFAULT_ITEM_ID } from '../../../constants';
 import { IItem } from '../../../types/item.interface';
 
 function CatalogPage(): JSX.Element {
-  const addItemToCartHandler = (item: IItem) => {
-    console.log('New item in cart - ', item);
+  const deleteItemFromCart = (item: IItem) => {
+    console.log('This item will be removed from cart - ', item);
   };
 
   return (
@@ -16,10 +16,10 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <CartAdd
-            modalTitle='Добавить товар в корзину'
+          <CartDelete
+            modalTitle='Удалить этот товар?'
             item={makeFakeItem(DEFAULT_ITEM_ID, 67, 137)}
-            addToCartHandler={addItemToCartHandler}
+            cartDeleteHandler={deleteItemFromCart}
           />
         </div>
       </main>

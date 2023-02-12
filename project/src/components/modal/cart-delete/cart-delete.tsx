@@ -3,13 +3,13 @@ import { GuitarType } from '../../../constants';
 import { IItem } from '../../../types/item.interface';
 import CrossBtn from '../../common/cross-btn/cross-btn';
 
-interface ICartAddProps {
+interface ICartDeleteProps {
   modalTitle: string;
   item: IItem;
-  cartAddHandler: (item: IItem) => void;
+  cartDeleteHandler: (item: IItem) => void;
 }
 
-function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Element {
+function CartDelete({ modalTitle, item, cartDeleteHandler }: ICartDeleteProps): JSX.Element {
   const [modalActive, setModalActive] = useState(true);
   const { image, name, sku, type, strings, price } = item;
 
@@ -17,9 +17,9 @@ function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Eleme
     setModalActive(false);
   };
 
-  const addBtnClickHandler = () => {
+  const deleteBtnClickHandler = () => {
     setModalActive(false);
-    cartAddHandler(item);
+    cartDeleteHandler(item);
   };
 
   return (
@@ -27,7 +27,7 @@ function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Eleme
       <div className="modal__wrapper">
         <div onClick={closeModalWindow} className="modal__overlay" data-close-modal></div>
         <div className="modal__content">
-          <h2 className="modal__header title title--medium">{modalTitle}</h2>
+          <h2 className="modal__header title title--medium title--red">{modalTitle}</h2>
           <div className="modal__info">
             <img
               className="modal__img"
@@ -50,10 +50,16 @@ function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Eleme
           </div>
           <div className="modal__button-container">
             <button
-              className="button button--red button--big modal__button modal__button--add"
-              onClick={addBtnClickHandler}
+              className="button button--small modal__button"
+              onClick={deleteBtnClickHandler}
             >
-              Добавить в корзину
+              Удалить товар
+            </button>
+            <button
+              className="button button--black-border button--small modal__button modal__button--right"
+              onClick={closeModalWindow}
+            >
+              Продолжить покупки
             </button>
           </div>
           <CrossBtn extraСlass='modal__close-btn' crossBtnHandler={closeModalWindow}/>
@@ -63,4 +69,4 @@ function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Eleme
   );
 }
 
-export default CartAdd;
+export default CartDelete;
