@@ -3,16 +3,32 @@ import Button from '../../common/button/button';
 
 interface IEditItemImageProps {
   extraClass?: string;
-  imageChangeHandler: (evt: ChangeEvent<HTMLDivElement>) => void;
+  imageChangeHandler: (imgFile: FileList | null) => void;
 }
 
 function EditItemImage({extraClass = '', imageChangeHandler}: IEditItemImageProps): JSX.Element {
   const fileInput = useRef<HTMLInputElement | null>(null);
-  const [itemImage, setItemImage] = useState<string | null>(null);
-
+  const [itemImage, setItemImage] = useState<string | ArrayBuffer | null>(null);
 
   const fileInputHandler = () => {
     fileInput.current?.click();
+  };
+
+  const addNewImageHandler = ({target}: ChangeEvent<HTMLInputElement>) => {
+    const fileReader = new FileReader();
+    fileReader.onload = function() {
+      setItemImage(fileReader.result);
+      imageChangeHandler(target.files);
+    };
+
+    if (target.files) {
+      fileReader.readAsDataURL(target.files[0]);
+    }
+  };
+
+  const deleteImageHandler = () => {
+    setItemImage(null);
+    imageChangeHandler(null);
   };
 
   return (
@@ -21,11 +37,10 @@ function EditItemImage({extraClass = '', imageChangeHandler}: IEditItemImageProp
         {itemImage &&
         <img
           className="edit-item-image__image"
-          src={itemImage}
-          srcSet="img/content/add-item-1@2x.png 2x"
+          src={typeof itemImage === 'string' ? itemImage : ''}
           width="133"
           height="332"
-          alt="СURT Z30 Plus"
+          alt=""
         />}
       </div>
       <div className="edit-item-image__btn-wrap">
@@ -45,6 +60,7 @@ function EditItemImage({extraClass = '', imageChangeHandler}: IEditItemImageProp
           style={{display: 'none'}}
         />
         <Button
+          btnClickHandler={deleteImageHandler}
           btnSize='button--small'
           btnStyle='button--black-border'
           btnType='edit-item-image__btn'
