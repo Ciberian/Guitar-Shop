@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import ReviewForm from '../../../components/modal/review-form/review-form';
+import ReviewForm from '../../../components/modal-windows/review-form/review-form';
 
 function CatalogPage(): JSX.Element {
   return (

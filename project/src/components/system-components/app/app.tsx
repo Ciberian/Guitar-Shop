@@ -8,7 +8,7 @@ import OrdersPage from '../../../pages/admin/orders-page/orders-page';
 import OrderPage from '../../../pages/admin/order-page/order-page';
 import LoginPage from '../../../pages/auth/login-page/login-page';
 import RegisterPage from '../../../pages/auth/register-page/register-page';
-import NotFoundPage from '../../../pages/not-found-page/not-found-page';
+import NotFoundPage from '../../../pages/404/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 // import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../../hooks';
