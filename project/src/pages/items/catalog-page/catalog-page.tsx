@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import SuccessAdd from '../../../components/modal/success-add/success-add';
+import SuccessReview from '../../../components/modal/success-review/success-review';
 
 function CatalogPage(): JSX.Element {
 
@@ -11,7 +11,7 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <SuccessAdd />
+          <SuccessReview />
         </div>
       </main>
       <SiteFooter />
