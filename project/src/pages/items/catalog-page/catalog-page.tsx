@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import EnterSiteForm from '../../../components/modal/enter-site-form/enter-site-form';
+import ReviewForm from '../../../components/modal/review-form/review-form';
 
 function CatalogPage(): JSX.Element {
 
@@ -11,7 +11,7 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <EnterSiteForm />
+          <ReviewForm id='1' />
         </div>
       </main>
       <SiteFooter />
