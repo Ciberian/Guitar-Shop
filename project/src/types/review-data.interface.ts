@@ -1,7 +1,7 @@
 export interface IReviewData {
   authorName?: string;
-  advantages: string;
-  disadvantages: string;
+  advantage: string;
+  disadv: string;
   comment: string;
   rating: number;
   date?: Date,

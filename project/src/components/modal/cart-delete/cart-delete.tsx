@@ -4,12 +4,11 @@ import { IItem } from '../../../types/item.interface';
 import CrossBtn from '../../common/cross-btn/cross-btn';
 
 interface ICartDeleteProps {
-  modalTitle: string;
   item: IItem;
   cartDeleteHandler: (item: IItem) => void;
 }
 
-function CartDelete({ modalTitle, item, cartDeleteHandler }: ICartDeleteProps): JSX.Element {
+function CartDelete({ item, cartDeleteHandler }: ICartDeleteProps): JSX.Element {
   const [modalActive, setModalActive] = useState(true);
   const { image, name, sku, type, strings, price } = item;
 
@@ -27,7 +26,7 @@ function CartDelete({ modalTitle, item, cartDeleteHandler }: ICartDeleteProps): 
       <div className="modal__wrapper">
         <div onClick={closeModalWindow} className="modal__overlay" data-close-modal></div>
         <div className="modal__content">
-          <h2 className="modal__header title title--medium title--red">{modalTitle}</h2>
+          <h2 className="modal__header title title--medium title--red">Удалить этот товар?</h2>
           <div className="modal__info">
             <img
               className="modal__img"

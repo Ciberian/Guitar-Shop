@@ -4,12 +4,11 @@ import { IItem } from '../../../types/item.interface';
 import CrossBtn from '../../common/cross-btn/cross-btn';
 
 interface ICartAddProps {
-  modalTitle: string;
   item: IItem;
   cartAddHandler: (item: IItem) => void;
 }
 
-function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Element {
+function CartAdd({ item, cartAddHandler }: ICartAddProps): JSX.Element {
   const [modalActive, setModalActive] = useState(true);
   const { image, name, sku, type, strings, price } = item;
 
@@ -27,7 +26,7 @@ function CartAdd({ modalTitle, item, cartAddHandler }: ICartAddProps): JSX.Eleme
       <div className="modal__wrapper">
         <div onClick={closeModalWindow} className="modal__overlay" data-close-modal></div>
         <div className="modal__content">
-          <h2 className="modal__header title title--medium">{modalTitle}</h2>
+          <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
           <div className="modal__info">
             <img
               className="modal__img"

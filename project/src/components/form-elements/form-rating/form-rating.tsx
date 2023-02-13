@@ -2,7 +2,7 @@ import React from 'react';
 import { MAX_REVIEW_RATING, MIN_REVIEW_RATING, RATING_TITLES } from '../../../constants';
 
 interface IFormRatingProps {
-  currentRate: string;
+  currentRate: number;
   fromRatingChangeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -15,7 +15,8 @@ function FormRating({currentRate, fromRatingChangeHandler}: IFormRatingProps):JS
         <input
           className="visually-hidden"
           id={`star-${i}`}
-          name="rating" type="radio"
+          name="rating"
+          type="radio"
           value={i}
           onChange={fromRatingChangeHandler}
         />

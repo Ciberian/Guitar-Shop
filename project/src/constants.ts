@@ -91,14 +91,32 @@ export const BTN_STYLES = [
   'button--red'
 ] as const;
 
-export const TIMEOUT_SHOW_ERROR = 3000;
+export const DEFAULT_REVIEW_FORM_STATE = {
+  rating: 0,
+  advantage: '',
+  disadv: '',
+  comment: '',
+};
 
+export const TIMEOUT_SHOW_ERROR = 3000;
 export const DEFAULT_ITEM_ID = 0;
 
 export const MOCK_ITEMS_COUNT = 10;
-
 export const MOCK_REVIEWS_COUNT = 10;
 
+export const MIN_IMG_ID = 1;
 export const MAX_IMG_ID = 100;
 
-export const MIN_IMG_ID = 1;
+export const MIN_ADV_DISADV_LENGTH = 50;
+export const MAX_ADV_DISADV_LENGTH = 100;
+
+export const MIN_COMMENT_LENGTH = 5;
+export const MAX_COMMENT_LENGTH = 1024;
+
+export const TEXT_FIELD_ERROR_MESSAGE = {
+  EmptyField: 'Заполните поле.',
+  МinCharacters: 'Минимальная длина 50 символов.',
+  МaxCharacters: 'Максимальная длина 100 символов.',
+  МinCharactersForComment: 'Минимальная длина 5 символов',
+  МaxCharactersForComment: 'Максимальная длина 1024 символа.',
+} as const;

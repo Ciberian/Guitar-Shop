@@ -9,7 +9,7 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <ReviewForm id='1' />
+          <ReviewForm itemId={1} itemName='Гитара AGMX100500' />
         </div>
       </main>
       <SiteFooter />

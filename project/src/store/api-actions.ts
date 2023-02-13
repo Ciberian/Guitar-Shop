@@ -102,8 +102,8 @@ export const fetchNewReviewAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('reviews/addNew', async ({rating, advantages, disadvantages, comment, itemId}, { extra: api }) => {
-  const { data } = await api.post<IReview[]>(`${APIRoute.Reviews}/${itemId}`, { rating, advantages, disadvantages, comment });
+>('reviews/addNew', async ({rating, advantage, disadv, comment, itemId}, { extra: api }) => {
+  const { data } = await api.post<IReview[]>(`${APIRoute.Reviews}/${itemId}`, { rating, advantage, disadv, comment });
   return data;
 });
 
