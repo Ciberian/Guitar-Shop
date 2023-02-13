@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import SuccessSend from '../../../components/modal/success-send/success-send';
+import EnterSiteForm from '../../../components/modal/enter-site-form/enter-site-form';
 
 function CatalogPage(): JSX.Element {
 
@@ -11,7 +11,7 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '390px', margin: '40px auto'}}>
-          <SuccessSend />
+          <EnterSiteForm />
         </div>
       </main>
       <SiteFooter />
