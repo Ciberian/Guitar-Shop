@@ -4,8 +4,6 @@ import SiteFooter from '../../../components/page-components/site-footer/site-foo
 import ReviewForm from '../../../components/modal/review-form/review-form';
 
 function CatalogPage(): JSX.Element {
-
-
   return (
     <>
       <SiteHeader />

@@ -1,10 +1,7 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useAppDispatch } from '../../../hooks';
-import { fetchNewReviewAction } from '../../../store/api-actions';
-import ReviewRating from '../../form-elements/form-rating/form-rating';
+import FormRating from '../../form-elements/form-rating/form-rating';
 
-const MAX_REVIEW_RATING = 5;
-const MIN_REVIEW_RATING = 1;
 const MIN_REVIEW_SIMBOLS = 50;
 const MAX_REVIEW_SIMBOLS = 300;
 
@@ -12,7 +9,7 @@ type ReviewFormProps = {
   id: string;
 };
 
-function ReviewForm({ id }: ReviewFormProps): JSX.Element {
+function ReviewForm({id}: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [formData, setformData] = useState({
@@ -30,56 +27,38 @@ function ReviewForm({ id }: ReviewFormProps): JSX.Element {
     setformData({ ...formData, [name]: value });
   };
 
-  const getReviewRating = () => {
-    const reviewRating: JSX.Element[] = [];
-
-    for (let i = MAX_REVIEW_RATING; i >= MIN_REVIEW_RATING; i--) {
-      reviewRating.push(<ReviewRating ratingChangeHandler={formDataChangeHandler} key={`key-${i}`} />);
-    }
-
-    return reviewRating;
-  };
+  // eslint-disable-next-line no-console
+  console.log(formData);
 
   return (
-    <form
-      className="reviews__form form"
-      action="#"
-      method="post"
-      onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        dispatch(fetchNewReviewAction({
-          rating: Number(formData.rating),
-          advantages: '',
-          disadvantages: '',
-          comment: formData.comment,
-          itemId: Number(id),
-        }));
-        setformData({ rating: '', comment: '' });
-      }}
-    >
-      <label className="reviews__label form__label" htmlFor="review">
-        Your review
-      </label>
-      <div className="reviews__rating-form form__rating">{getReviewRating()}</div>
-      <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="comment"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={formDataChangeHandler}
-        value={formData.comment}
-      >
-      </textarea>
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least{' '}
-          <b className="reviews__text-amount">50 characters</b>.
-        </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!isReviewLongEnough() || !formData.rating}>
-          Submit
-        </button>
+    <div className="modal is-active modal--review modal-for-ui-kit">
+      <div className="modal__wrapper">
+        <div className="modal__overlay" data-close-modal></div>
+        <div className="modal__content">
+          <h2 className="modal__header modal__header--review title title--medium">Оставить отзыв</h2>
+          <form className="form-review">
+            <div className="form-review__wrapper">
+              <h3 className="form-review__title">СURT Z30 Plus</h3>
+              <div><span className="form-review__label form-review__label--required form-review__label--star">Ваша Оценка</span>
+                <FormRating currentRate={formData.rating} fromRatingChangeHandler={formDataChangeHandler} />
+              </div>
+            </div>
+            <label className="form-review__label form-review__label--required" htmlFor="advantage">Достоинства</label>
+            <input className="form-review__input" id="advantage" type="text" autoComplete="off" />
+            <p className="form-review__warning">Заполните поле</p>
+            <label className="form-review__label form-review__label--required" htmlFor="disadv">Недостатки</label>
+            <input className="form-review__input" id="disadv" type="text" autoComplete="off" />
+            <p className="form-review__warning">Заполните поле</p>
+            <label className="form-review__label form-review__label--required form-review__label--textarea" htmlFor="comment">Комментарий</label>
+            <textarea className="form-review__input form-review__input--textarea" id="comment" autoComplete="off"></textarea>
+            <p className="form-review__warning">Заполните поле</p>
+            <button className="button button--medium-20 form-review__button" type="submit">Отправить отзыв</button>
+          </form>
+          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть"><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
+          </button>
+        </div>
       </div>
-    </form>
+    </div>
   );
 }
 
