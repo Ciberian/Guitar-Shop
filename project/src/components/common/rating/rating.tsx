@@ -2,11 +2,11 @@ import { RATINGS, RATING_TITLES } from '../../../constants';
 
 interface IRatingProps {
   extraСlass?: string;
-  ratingValue: number;
+  ratingValue?: number;
   reviewsCount?: number;
 }
 
-function Rating({ extraСlass, ratingValue, reviewsCount }: IRatingProps): JSX.Element {
+function Rating({ extraСlass = '', ratingValue = 0, reviewsCount = 0 }: IRatingProps): JSX.Element {
   return (
     <div className={`rate ${extraСlass}`}>
       {RATINGS.map((rating) => (

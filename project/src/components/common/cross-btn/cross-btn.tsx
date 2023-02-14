@@ -3,7 +3,7 @@ interface ICrossBtnProps {
   crossBtnHandler?: () => void;
 }
 
-function CrossBtn({extraСlass, crossBtnHandler}: ICrossBtnProps): JSX.Element {
+function CrossBtn({extraСlass = '', crossBtnHandler}: ICrossBtnProps): JSX.Element {
   return (
     <button
       className={`button-cross ${extraСlass}`}

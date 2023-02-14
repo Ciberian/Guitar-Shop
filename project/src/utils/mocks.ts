@@ -22,7 +22,7 @@ export const makeFakeItem = (id: number, imgWidth: number, imgHeight: number): I
   sku: random.word(),
   strings: 6,
   rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
-  price: datatype.number({ min: 100, max: 1000 }),
+  price: datatype.number({ min: 1000, max: 10000 }),
   reviewsCount: datatype.number({ min: 0, max: 10 }),
   date: date.recent(),
 });

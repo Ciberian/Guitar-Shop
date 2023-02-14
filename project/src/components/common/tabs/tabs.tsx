@@ -7,7 +7,7 @@ interface ITabsProps {
   item: IItem;
 }
 
-function Tabs({ extraСlass, item }: ITabsProps): JSX.Element {
+function Tabs({ extraСlass = '', item }: ITabsProps): JSX.Element {
   const { sku, type, strings, description } = item;
   const [activeTab, setActiveTab] = useState('description');
 

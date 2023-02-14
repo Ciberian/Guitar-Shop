@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
 interface ISocialsProps {
-  extraСlass: string;
+  extraСlass?: string;
 }
 
-function Socials({extraСlass}: ISocialsProps): JSX.Element {
+function Socials({extraСlass = ''}: ISocialsProps): JSX.Element {
   return (
     <div className={`socials ${extraСlass}`}>
       <ul className="socials__list">
