@@ -24,17 +24,18 @@ export const APIRoute = {
 } as const;
 
 export const SortType = {
-  Popular: 'Popular',
-  PriceToHigh: 'Price: low to high',
-  PriceToLow: 'Price: high to low',
-  TopRated: 'Top rated first'
+  DateFromOld: 'по дате-возрастание',
+  DateFromNew: 'по дате-убывание',
+  PriceToHigh: 'по цене-возрастание',
+  PriceToLow: 'по цене-убывание',
+  PopularToHigh: 'по популярности-возрастание',
+  PopularToLow: 'по популярности-убывание',
 } as const;
 
 export const NameSpace = {
-  Data: 'DATA',
+  Items: 'ITEMS',
   User: 'USER',
   Sort: 'SORT',
-  Item: 'ITEM',
   Error: 'ERROR',
 } as const;
 

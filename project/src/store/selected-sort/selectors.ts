@@ -1,4 +1,6 @@
 import { NameSpace } from '../../constants';
 import { State } from '../../types/state.types';
 
-export const getSortType = (state: State): string => state[NameSpace.Sort].sortType;
+export const getCatalogSortType = (state: State): string => state[NameSpace.Sort].catalogSortType;
+export const getItemsListSortType = (state: State): string => state[NameSpace.Sort].itemsListSortType;
+export const getOrdersSortType = (state: State): string => state[NameSpace.Sort].ordersSortType;

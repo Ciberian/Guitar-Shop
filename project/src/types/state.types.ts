@@ -6,7 +6,9 @@ import { IReview } from './review.interface.js';
 import { IOrder } from './order.interface.js';
 
 export type SelectedSort = {
-  sortType: string;
+  catalogSortType: string;
+  itemsListSortType: string;
+  ordersSortType: string;
 };
 
 export type CurrentError = {

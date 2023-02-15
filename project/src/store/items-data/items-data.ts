@@ -2,17 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants';
 import { ItemsData } from '../../types/state.types';
 import {
-  fetchItemsAction,
-  fetchItemAction,
-  fetchCartItemsAction,
-  fetchChangeItemAction,
-  fetchNewItemAction,
-  fetchDeleteItemAction,
-  fetchReviewsAction,
-  fetchNewReviewAction,
-  fetchOrdersAction,
-  fetchOrderAction,
-  fetchDeleteOrderAction,
+  getItemsAction,
+  getItemAction,
+  getCartItemsAction,
+  changeItemAction,
+  addNewItemAction,
+  addNewCartItemAction,
+  deleteItemAction,
+  deleteCartItemAction,
+  getReviewsAction,
+  addNewReviewAction,
+  getOrdersAction,
+  getOrderAction,
+  deleteOrderAction,
 } from '../api-actions';
 
 const initialState: ItemsData = {
@@ -28,70 +30,76 @@ const initialState: ItemsData = {
 };
 
 export const itemsData = createSlice({
-  name: NameSpace.Data,
+  name: NameSpace.Items,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchItemsAction.pending, (state) => {
+      .addCase(getItemsAction.pending, (state) => {
         state.isDataLoaded = false;
       })
-      .addCase(fetchItemsAction.fulfilled, (state, action) => {
+      .addCase(getItemsAction.fulfilled, (state, action) => {
         state.items = action.payload;
         state.isDataLoaded = true;
       })
-      .addCase(fetchItemsAction.rejected, (state) => {
+      .addCase(getItemsAction.rejected, (state) => {
         state.isDataLoaded = true;
       })
-      .addCase(fetchItemAction.pending, (state) => {
+      .addCase(getItemAction.pending, (state) => {
         state.isItemLoaded = false;
       })
-      .addCase(fetchItemAction.fulfilled, (state, action) => {
+      .addCase(getItemAction.fulfilled, (state, action) => {
         state.item = action.payload;
         state.isItemLoaded = true;
       })
-      .addCase(fetchItemAction.rejected, (state) => {
+      .addCase(getItemAction.rejected, (state) => {
         state.isItemLoaded = true;
       })
-      .addCase(fetchCartItemsAction.fulfilled, (state, action) => {
+      .addCase(getCartItemsAction.fulfilled, (state, action) => {
         state.cartItems = action.payload;
       })
-      .addCase(fetchChangeItemAction.fulfilled, (state, action) => {
+      .addCase(changeItemAction.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(fetchNewItemAction.fulfilled, (state, action) => {
+      .addCase(addNewItemAction.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(fetchDeleteItemAction.fulfilled, (state, action) => {
+      .addCase(addNewCartItemAction.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(fetchReviewsAction.fulfilled, (state, action) => {
+      .addCase(deleteItemAction.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(deleteCartItemAction.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(getReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
-      .addCase(fetchNewReviewAction.fulfilled, (state, action) => {
+      .addCase(addNewReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
-      .addCase(fetchOrdersAction.pending, (state) => {
+      .addCase(getOrdersAction.pending, (state) => {
         state.isDataLoaded = false;
       })
-      .addCase(fetchOrdersAction.fulfilled, (state, action) => {
+      .addCase(getOrdersAction.fulfilled, (state, action) => {
         state.orders = action.payload;
         state.isDataLoaded = true;
       })
-      .addCase(fetchOrdersAction.rejected, (state) => {
+      .addCase(getOrdersAction.rejected, (state) => {
         state.isDataLoaded = true;
       })
-      .addCase(fetchOrderAction.pending, (state) => {
+      .addCase(getOrderAction.pending, (state) => {
         state.isOrderLoaded = false;
       })
-      .addCase(fetchOrderAction.fulfilled, (state, action) => {
+      .addCase(getOrderAction.fulfilled, (state, action) => {
         state.order = action.payload;
         state.isOrderLoaded = true;
       })
-      .addCase(fetchOrderAction.rejected, (state) => {
+      .addCase(getOrderAction.rejected, (state) => {
         state.isOrderLoaded = true;
       })
-      .addCase(fetchDeleteOrderAction.fulfilled, (state, action) => {
+      .addCase(deleteOrderAction.fulfilled, (state, action) => {
         state.orders = action.payload;
       });
   },

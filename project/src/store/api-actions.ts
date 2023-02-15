@@ -10,43 +10,43 @@ import { APIRoute } from '../constants';
 import { IOrder } from '../types/order.interface';
 import { IReviewData } from '../types/review-data.interface';
 
-export const fetchItemsAction = createAsyncThunk<
+export const getItemsAction = createAsyncThunk<
   IItem[],
   undefined, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('items/loadAll', async (_arg, { extra: api }) => {
+>('items/getItemsAction', async (_arg, { extra: api }) => {
   const { data } = await api.get<IItem[]>(APIRoute.Items);
   return data;
 });
 
-export const fetchItemAction = createAsyncThunk<
+export const getItemAction = createAsyncThunk<
   IItem,
   number, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('items/loadOne', async (itemId, { extra: api }) => {
+>('items/getItemAction', async (itemId, { extra: api }) => {
   const { data } = await api.get<IItem>(`${APIRoute.Items}/${itemId}`);
   return data;
 });
 
-export const fetchCartItemsAction = createAsyncThunk<
+export const getCartItemsAction = createAsyncThunk<
   IItem[],
   undefined, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('items/loadCart', async (_arg, { extra: api }) => {
+>('items/getCartItemsAction', async (_arg, { extra: api }) => {
   const { data } = await api.get<IItem[]>(APIRoute.Cart);
   return data;
 });
 
-export const fetchChangeItemAction = createAsyncThunk<
+export const changeItemAction = createAsyncThunk<
   IItem[],
   IItem,
   {
@@ -54,91 +54,115 @@ export const fetchChangeItemAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('items/changeOne', async (item, { extra: api }) => {
-  const { data } = await api.patch<IItem[]>(`${APIRoute.Items}/${item.id}`);
+>('items/changeItemAction', async (item, { extra: api }) => {
+  const { data } = await api.patch<IItem[]>(`${APIRoute.Items}/${item.id}`, item);
   return data;
 });
 
-export const fetchNewItemAction = createAsyncThunk<
+export const addNewItemAction = createAsyncThunk<
   IItem[],
   IItem, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('items/addNew', async (item, { extra: api }) => {
-  const { data } = await api.post<IItem[]>(APIRoute.Items, item);
+>('items/addNewItemAction', async (newItem, { extra: api }) => {
+  const { data } = await api.post<IItem[]>(APIRoute.Items, newItem);
   return data;
 });
 
-export const fetchDeleteItemAction = createAsyncThunk<
+export const addNewCartItemAction = createAsyncThunk<
   IItem[],
   number, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('items/deleteOne', async (itemId, { extra: api }) => {
+>('items/addNewCartItemAction', async (itemId, { extra: api }) => {
+  const { data } = await api.post<IItem[]>(`${APIRoute.Cart}/${itemId}`);
+  return data;
+});
+
+export const deleteItemAction = createAsyncThunk<
+  IItem[],
+  number, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('items/deleteItemAction', async (itemId, { extra: api }) => {
   const { data } = await api.delete<IItem[]>(`${APIRoute.Items}/${itemId}`);
   return data;
 });
 
-export const fetchReviewsAction = createAsyncThunk<
+export const deleteCartItemAction = createAsyncThunk<
+  IItem[],
+  number, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('items/deleteCartItemAction', async (itemId, { extra: api }) => {
+  const { data } = await api.delete<IItem[]>(`${APIRoute.Cart}/${itemId}`);
+  return data;
+});
+
+export const getReviewsAction = createAsyncThunk<
   IReview[],
   number, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('reviews/loadAll', async (itemId, { extra: api }) => {
+>('items/getReviewsAction', async (itemId, { extra: api }) => {
   const { data } = await api.get<IReview[]>(`${APIRoute.Reviews}/${itemId}`);
   return data;
 });
 
-export const fetchNewReviewAction = createAsyncThunk<
+export const addNewReviewAction = createAsyncThunk<
   IReview[],
   IReviewData & {itemId: number}, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('reviews/addNew', async ({rating, advantage, disadv, comment, itemId}, { extra: api }) => {
+>('items/addNewReviewAction', async ({rating, advantage, disadv, comment, itemId}, { extra: api }) => {
   const { data } = await api.post<IReview[]>(`${APIRoute.Reviews}/${itemId}`, { rating, advantage, disadv, comment });
   return data;
 });
 
-export const fetchOrdersAction = createAsyncThunk<
+export const getOrdersAction = createAsyncThunk<
   IOrder[],
   undefined, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('orders/loadAll', async (_arg, { extra: api }) => {
+>('items/getOrdersAction', async (_arg, { extra: api }) => {
   const { data } = await api.get<IOrder[]>(APIRoute.Orders);
   return data;
 });
 
-export const fetchOrderAction = createAsyncThunk<
+export const getOrderAction = createAsyncThunk<
   IOrder,
   number, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('orders/loadOne', async (orderId, { extra: api }) => {
+>('items/getOrderAction', async (orderId, { extra: api }) => {
   const { data } = await api.get<IOrder>(`${APIRoute.Orders}/${orderId}`);
   return data;
 });
 
-export const fetchDeleteOrderAction = createAsyncThunk<
+export const deleteOrderAction = createAsyncThunk<
   IOrder[],
   number, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('orders/deleteOne', async (orderId, { extra: api }) => {
+>('items/deleteOrderAction', async (orderId, { extra: api }) => {
   const { data } = await api.delete<IOrder[]>(`${APIRoute.Orders}/${orderId}`);
   return data;
 });
@@ -151,7 +175,7 @@ export const checkAuthAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
+>('user/checkAuthAction', async (_arg, { dispatch, extra: api }) => {
   const { data } = await api.get(APIRoute.Login);
   return data;
 });
@@ -164,7 +188,7 @@ export const loginAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/login', async ({ login: email, password }, { extra: api }) => {
+>('user/loginAction', async ({ login: email, password }, { extra: api }) => {
   const { data } = await api.post<IUserData>(APIRoute.Login, { email, password });
   saveToken(data.token);
   return data;
@@ -178,7 +202,7 @@ export const logoutAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/logout', async (_arg, { extra: api }) => {
+>('user/logoutAction', async (_arg, { extra: api }) => {
   await api.delete(APIRoute.Logout);
   dropToken();
 });

@@ -2,7 +2,7 @@ import CrossBtn from '../../common/cross-btn/cross-btn';
 import FormRating from '../../form-elements/form-rating/form-rating';
 import { useAppDispatch } from '../../../hooks';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { fetchNewReviewAction } from '../../../store/api-actions';
+import { addNewReviewAction } from '../../../store/api-actions';
 import {
   DEFAULT_REVIEW_FORM_STATE,
   MAX_ADV_DISADV_LENGTH,
@@ -36,7 +36,7 @@ function ReviewForm({itemId, itemName}: ReviewFormProps): JSX.Element {
 
   const reviewFormSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(fetchNewReviewAction({...formData, itemId: itemId}));
+    dispatch(addNewReviewAction({...formData, itemId: itemId}));
   };
 
   const getReviewWarningMessage = (textLength: number, isComment?: boolean) => {

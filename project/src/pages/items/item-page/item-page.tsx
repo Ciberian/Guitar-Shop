@@ -6,7 +6,7 @@ import LoadingScreen from '../../../components/system-components/loading-screen/
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
-import { fetchItemAction, fetchReviewsAction } from '../../../store/api-actions';
+import { getItemAction, getReviewsAction } from '../../../store/api-actions';
 import { getLoadedItemStatus, getItem, getReviews } from '../../../store/items-data/selectors';
 
 function ItemPage(): JSX.Element {
@@ -21,8 +21,8 @@ function ItemPage(): JSX.Element {
   const reviews = useAppSelector(getReviews);
 
   useEffect(() => {
-    dispatch(fetchItemAction(Number(id)));
-    dispatch(fetchReviewsAction(Number(id)));
+    dispatch(getItemAction(Number(id)));
+    dispatch(getReviewsAction(Number(id)));
   }, [id, dispatch]);
 
   if (!isOfferLoaded) {

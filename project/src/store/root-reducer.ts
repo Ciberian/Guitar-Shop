@@ -6,7 +6,7 @@ import { userProcess } from './user-process/user-process';
 import { errorProcess } from './error-process/error-process';
 
 export const rootReducer = combineReducers({
-  [NameSpace.Data]: itemsData.reducer,
+  [NameSpace.Items]: itemsData.reducer,
   [NameSpace.User]: userProcess.reducer,
   [NameSpace.Sort]: selectedSort.reducer,
   [NameSpace.Error]: errorProcess.reducer,
