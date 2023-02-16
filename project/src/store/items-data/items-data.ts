@@ -23,7 +23,7 @@ const initialState: ItemsData = {
   cartItems: [],
   orders: [],
   order: null,
-  reviews: null,
+  reviews: [],
   isDataLoaded: false,
   isItemLoaded: false,
   isOrderLoaded: false,
@@ -62,22 +62,22 @@ export const itemsData = createSlice({
         state.items = action.payload;
       })
       .addCase(addNewItemAction.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items.push(action.payload);
       })
       .addCase(addNewCartItemAction.fulfilled, (state, action) => {
         state.cartItems.push(action.payload);
       })
       .addCase(deleteItemAction.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = state.items.filter((item) => item.id !== action.payload);
       })
       .addCase(deleteCartItemAction.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
       })
       .addCase(getReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
       .addCase(addNewReviewAction.fulfilled, (state, action) => {
-        state.reviews = action.payload;
+        state.reviews.push(action.payload);
       })
       .addCase(getOrdersAction.pending, (state) => {
         state.isDataLoaded = false;
@@ -100,7 +100,7 @@ export const itemsData = createSlice({
         state.isOrderLoaded = true;
       })
       .addCase(deleteOrderAction.fulfilled, (state, action) => {
-        state.orders = action.payload;
+        state.orders = state.orders.filter((order) => order.id !== action.payload);
       });
   },
 });

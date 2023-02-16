@@ -26,7 +26,7 @@ export type ItemsData = {
   cartItems: IItem[],
   orders: IOrder[],
   order: null | IOrder,
-  reviews: null | IReview[],
+  reviews: IReview[],
   isDataLoaded: boolean,
   isItemLoaded: boolean,
   isOrderLoaded: boolean,
