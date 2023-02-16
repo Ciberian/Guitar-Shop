@@ -72,14 +72,14 @@ export const addNewItemAction = createAsyncThunk<
 });
 
 export const addNewCartItemAction = createAsyncThunk<
-  IItem[],
+  IItem,
   number, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
 >('items/addNewCartItemAction', async (itemId, { extra: api }) => {
-  const { data } = await api.post<IItem[]>(`${APIRoute.Cart}/${itemId}`);
+  const { data } = await api.post<IItem>(`${APIRoute.Cart}/${itemId}`);
   return data;
 });
 

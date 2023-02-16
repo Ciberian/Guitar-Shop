@@ -65,7 +65,7 @@ export const itemsData = createSlice({
         state.items = action.payload;
       })
       .addCase(addNewCartItemAction.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.cartItems.push(action.payload);
       })
       .addCase(deleteItemAction.fulfilled, (state, action) => {
         state.items = action.payload;

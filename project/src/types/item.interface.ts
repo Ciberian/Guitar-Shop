@@ -1,5 +1,5 @@
 export interface IItem {
-  id?: number;
+  id: number;
   name: string;
   description: string;
   image: string;
@@ -9,5 +9,5 @@ export interface IItem {
   rating?: number;
   price: number;
   reviewsCount?: number;
-  date?: Date;
+  date: Date;
 }
