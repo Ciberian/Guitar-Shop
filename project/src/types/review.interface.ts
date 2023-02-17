@@ -1,7 +1,7 @@
 import { IUserData } from './user-data.interface';
 
 export interface IReview {
-  id: string;
+  id: number;
   author: IUserData;
   advantage: string;
   disadv: string;

@@ -85,6 +85,7 @@ export const BTN_TYPES = [
   'button--up',
   'edit-item-image__btn',
   'cart__order-button',
+  'orders__remove-button',
 ] as const;
 
 export const BTN_STYLES = [
@@ -106,6 +107,7 @@ export const DEFAULT_ITEM_ID = 0;
 export const INITIAL_ITEM_COUNT = 1;
 export const MOCK_ITEMS_COUNT = 3;
 export const MOCK_REVIEWS_COUNT = 10;
+export const MOCK_ORDERS_COUNT = 10;
 
 export const MIN_IMG_ID = 1;
 export const MAX_IMG_ID = 100;
