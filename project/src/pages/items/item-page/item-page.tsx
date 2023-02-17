@@ -33,6 +33,11 @@ function ItemPage(): JSX.Element {
     navigate(AppRoute.NotFoundPage);
   }
 
+  const makeActiveModalWindow = () => {
+    // eslint-disable-next-line no-console
+    console.log('Modal has "is-active" class');
+  };
+
   return (
     <div className="page">
       <SiteHeader />
@@ -43,7 +48,7 @@ function ItemPage(): JSX.Element {
             <div className="property__gallery">{isAuthorized}</div>
           </div>
         </section>
-        <section className="property__reviews reviews">{reviews ? <ReviewList reviews={reviews} /> : null}</section>
+        <section className="property__reviews reviews">{reviews ? <ReviewList reviews={reviews} makeActiveModalWindow={makeActiveModalWindow} /> : null}</section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>

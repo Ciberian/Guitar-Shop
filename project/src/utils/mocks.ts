@@ -31,9 +31,9 @@ export const makeFakeItem = (id: number, imgWidth: number, imgHeight: number): I
 export const makeFakeReview = (id: number): IReview => ({
   id: id,
   author: makeFakeUserInfo(),
-  advantage: random.words(22),
-  disadv: random.words(22),
-  comment: random.words(22),
+  advantage: random.words(12),
+  disadv: random.words(12),
+  comment: random.words(12),
   rating: datatype.number({ min: 1, max: 5, precision: 0.1 }),
   date: date.recent(),
 });

@@ -1,27 +1,46 @@
-import dayjs from 'dayjs';
-import { IReview } from '../../../types/review.interface';
 import ReviewItem from '../review-item/review-item';
+import Button from '../../common/button/button';
+import UpBtn from '../../common/up-btn/up-btn';
+import { useState } from 'react';
+import { REVIEWS_PER_CLICK } from '../../../constants';
+import { IReview } from '../../../types/review.interface';
 
 type ReviewsListProps = {
   reviews: IReview[];
+  makeActiveModalWindow: () => void;
 };
 
-function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
-  const offerReviews = [...reviews];
+function ReviewsList({ reviews, makeActiveModalWindow }: ReviewsListProps): JSX.Element {
+  const [shownReviews, setShownReviews] = useState(REVIEWS_PER_CLICK);
+
+  const showMoreReviews = () => {
+    const moreReviews = shownReviews + REVIEWS_PER_CLICK;
+    setShownReviews(moreReviews);
+  };
+
   return (
-    <>
-      <h2 className="reviews__title">
-        Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
-      </h2>
-      <ul className="reviews__list">
-        {offerReviews
-          .sort((reviewA, reviewB) => dayjs(reviewB.date).diff(dayjs(reviewA.date), 'second'))
-          .slice(0, 10)
-          .map((review) => (
-            <ReviewItem review={review} key={review.id} />
-          ))}
-      </ul>
-    </>
+    <section className="reviews">
+      <h3 className="reviews__title title title--bigger">Отзывы</h3>
+      <Button
+        btnStyle='button--red-border'
+        btnType='reviews__sumbit-button'
+        btnClickHandler={makeActiveModalWindow}
+      >
+        Оставить отзыв
+      </Button>
+      {reviews
+        .slice(0, shownReviews)
+        .map((review) => <ReviewItem key={review.id} review={review} />)}
+      {shownReviews < reviews.length &&
+        <Button
+          btnSize='button--medium'
+          btnType='reviews__more-button'
+          btnClickHandler={showMoreReviews}
+        >
+          Показать еще отзывы
+        </Button>}
+      <UpBtn extraСlass='reviews__up-button' />
+    </section>
   );
 }
 
