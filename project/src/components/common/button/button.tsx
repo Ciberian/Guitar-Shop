@@ -11,7 +11,7 @@ interface IButtonProps {
 
 function Button({btnSize = 'button--big', btnType, btnStyle, children, btnClickHandler}: IButtonProps): JSX.Element {
   return (
-    <button onClick={btnClickHandler} className={`button ${btnSize} ${btnType} ${btnStyle}`}>
+    <button onClick={btnClickHandler} className={`button ${btnSize} ${btnType} ${btnStyle}`} type='button'>
       {children}
     </button>
   );

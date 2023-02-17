@@ -9,6 +9,7 @@ import { IUserData } from '../types/user-data.interface';
 import { APIRoute } from '../constants';
 import { IOrder } from '../types/order.interface';
 import { IReviewData } from '../types/review-data.interface';
+import { IOrderData } from '../types/order-data.interface';
 
 export const getItemsAction = createAsyncThunk<
   IItem[],
@@ -152,6 +153,18 @@ export const getOrderAction = createAsyncThunk<
   }
 >('items/getOrderAction', async (orderId, { extra: api }) => {
   const { data } = await api.get<IOrder>(`${APIRoute.Orders}/${orderId}`);
+  return data;
+});
+
+export const addNewOrderAction = createAsyncThunk<
+  IOrder,
+  IOrderData, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('items/addNewOrderAction', async ({ items, totalItems, totalPrice }, { extra: api }) => {
+  const { data } = await api.post<IOrder>(APIRoute.Orders, { items, totalItems, totalPrice });
   return data;
 });
 

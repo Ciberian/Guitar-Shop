@@ -1,16 +1,18 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import Catalog from '../../../components/page-components/catalog/catalog';
 import { makeFakeItems } from '../../../utils/mocks';
+import CartItemsList from '../../../components/page-components/cart-items-list/cart-items-list';
 
 function CatalogPage(): JSX.Element {
+  const fakeItems = makeFakeItems(75, 190);
+
   return (
     <>
       <SiteHeader />
       <main className='page-content'>
-        <div style={{width: '700px', margin: '40px auto'}}>
-          <Catalog items={makeFakeItems(75, 190)} />
+        <div style={{width: '940px', margin: '140px auto'}}>
+          <CartItemsList items={fakeItems} />
         </div>
       </main>
       <SiteFooter />

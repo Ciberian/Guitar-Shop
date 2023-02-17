@@ -69,27 +69,28 @@ export const RATING_TITLES = [
   'Плохо',
   'Нормально',
   'Хорошо',
-  'Отлично'
+  'Отлично',
 ];
 
 export const BTN_SIZES = [
   'button--mini',
   'button--small',
   'button--medium',
-  'button--big'
+  'button--big',
 ] as const;
 
 export const BTN_TYPES = [
   'button--in-cart',
   'button--add-to-cart',
   'button--up',
-  'edit-item-image__btn'
+  'edit-item-image__btn',
+  'cart__order-button',
 ] as const;
 
 export const BTN_STYLES = [
   'button--red-border',
   'button--black-border',
-  'button--red'
+  'button--red',
 ] as const;
 
 export const DEFAULT_REVIEW_FORM_STATE = {
@@ -102,7 +103,7 @@ export const DEFAULT_REVIEW_FORM_STATE = {
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const DEFAULT_ITEM_ID = 0;
 
-export const MOCK_ITEMS_COUNT = 10;
+export const MOCK_ITEMS_COUNT = 3;
 export const MOCK_REVIEWS_COUNT = 10;
 
 export const MIN_IMG_ID = 1;

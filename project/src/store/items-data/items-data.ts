@@ -14,6 +14,7 @@ import {
   addNewReviewAction,
   getOrdersAction,
   getOrderAction,
+  addNewOrderAction,
   deleteOrderAction,
 } from '../api-actions';
 
@@ -98,6 +99,9 @@ export const itemsData = createSlice({
       })
       .addCase(getOrderAction.rejected, (state) => {
         state.isOrderLoaded = true;
+      })
+      .addCase(addNewOrderAction.fulfilled, (state, action) => {
+        state.orders.push(action.payload);
       })
       .addCase(deleteOrderAction.fulfilled, (state, action) => {
         state.orders = state.orders.filter((order) => order.id !== action.payload);

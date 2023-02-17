@@ -3575,12 +3575,6 @@ button,
           appearance: none;
 }
 
-.quantity__input:hover,
-.quantity__input:focus {
-  border: none;
-  outline: 1px solid #c90606;
-}
-
 .quantity__button {
   position: relative;
 
