@@ -9,19 +9,21 @@ interface ITabsProps {
 
 function Tabs({ extraСlass = '', item }: ITabsProps): JSX.Element {
   const { sku, type, strings, description } = item;
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState('characteristics');
 
   return (
     <div className={`tabs ${extraСlass}`}>
       <button
         className={`button button--medium tabs__button ${activeTab === 'description' ? 'button--black-border' : ''}`}
         onClick={() => setActiveTab('characteristics')}
+        style={{height: '46px'}}
       >
         Характеристики
       </button>
       <button
         className={`button button--medium tabs__button ${activeTab === 'characteristics' ? 'button--black-border' : ''}`}
         onClick={() => setActiveTab('description')}
+        style={{height: '46px'}}
       >
         Описание
       </button>

@@ -88,6 +88,7 @@ export const BTN_TYPES = [
   'orders__remove-button',
   'reviews__sumbit-button',
   'reviews__more-button',
+  'product-container__button',
 ] as const;
 
 export const BTN_STYLES = [

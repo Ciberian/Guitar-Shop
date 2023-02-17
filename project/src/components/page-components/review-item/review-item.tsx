@@ -15,7 +15,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
         <h4 className="review__title review__title--author title title--lesser">{author.name}</h4>
         <span className="review__date">{formattedDate}</span>
       </div>
-      <Rating extraСlass='review__rating-panel' ratingValue={rating} />
+      <Rating extraСlass='review__rating-panel' ratingValue={rating} width={16} height={16} />
       <h4 className="review__title title title--lesser">Достоинства:</h4>
       <p className="review__value">{advantage}</p>
       <h4 className="review__title title title--lesser">Недостатки:</h4>

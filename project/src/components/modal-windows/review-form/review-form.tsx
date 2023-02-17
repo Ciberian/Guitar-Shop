@@ -18,7 +18,7 @@ type ReviewFormProps = {
   itemName: string;
 };
 
-function ReviewForm({itemId, itemName}: ReviewFormProps): JSX.Element {
+function ReviewForm({ itemId, itemName }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [modalActive, setModalActive] = useState(true);
