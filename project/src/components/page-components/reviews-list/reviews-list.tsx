@@ -7,10 +7,10 @@ import { IReview } from '../../../types/review.interface';
 
 type ReviewsListProps = {
   reviews: IReview[];
-  makeActiveModalWindow: () => void;
+  openModalWindow: () => void;
 };
 
-function ReviewsList({ reviews, makeActiveModalWindow }: ReviewsListProps): JSX.Element {
+function ReviewsList({ reviews, openModalWindow }: ReviewsListProps): JSX.Element {
   const [shownReviews, setShownReviews] = useState(REVIEWS_PER_CLICK);
 
   const showMoreReviews = () => {
@@ -24,7 +24,7 @@ function ReviewsList({ reviews, makeActiveModalWindow }: ReviewsListProps): JSX.
       <Button
         btnStyle='button--red-border'
         btnType='reviews__sumbit-button'
-        btnClickHandler={makeActiveModalWindow}
+        btnClickHandler={openModalWindow}
       >
         Оставить отзыв
       </Button>

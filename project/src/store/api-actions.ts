@@ -127,7 +127,7 @@ export const addNewReviewAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('items/addNewReviewAction', async ({rating, advantage, disadv, comment, itemId}, { extra: api }) => {
+>('items/addNewReviewAction', async ({ rating, advantage, disadv, comment, itemId }, { extra: api }) => {
   const { data } = await api.post<IReview>(`${APIRoute.Reviews}/${itemId}`, { rating, advantage, disadv, comment });
   return data;
 });

@@ -3,7 +3,7 @@ import SiteFooter from '../../../components/page-components/site-footer/site-foo
 import Rating from '../../../components/common/rating/rating';
 import ReviewList from '../../../components/page-components/reviews-list/reviews-list';
 import LoadingScreen from '../../../components/system-components/loading-screen/loading-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus, DEFAULT_ITEM_ID } from '../../../constants';
@@ -40,9 +40,13 @@ function ItemPage(): JSX.Element {
   //   navigate(AppRoute.NotFoundPage);
   // }
 
-  const makeActiveModalWindow = () => {
-    // eslint-disable-next-line no-console
-    console.log('Modal has "is-active" class');
+  const [modalActive, setModalActive] = useState(false);
+  const closeModalWindow = () => {
+    setModalActive(false);
+  };
+
+  const openModalWindow = () => {
+    setModalActive(true);
   };
 
   const item = makeFakeItem(DEFAULT_ITEM_ID, 90, 235);
@@ -97,11 +101,11 @@ function ItemPage(): JSX.Element {
               </Button>
             </div>
           </div>
-          <ReviewsList reviews={reviews} makeActiveModalWindow={makeActiveModalWindow} />
+          <ReviewsList reviews={reviews} openModalWindow={openModalWindow} />
         </div>
       </main>
       <SiteFooter />
-      <ReviewForm itemId={item.id} itemName={name} />
+      <ReviewForm itemId={item.id} itemName={name} isModalActive={modalActive} closeModalWindow={closeModalWindow} />
     </div>
   );
 }

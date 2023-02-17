@@ -1,7 +1,7 @@
 import CrossBtn from '../../common/cross-btn/cross-btn';
 import FormRating from '../../form-elements/form-rating/form-rating';
 import { useAppDispatch } from '../../../hooks';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { addNewReviewAction } from '../../../store/api-actions';
 import {
   DEFAULT_REVIEW_FORM_STATE,
@@ -16,17 +16,13 @@ import './review-form.css';
 type ReviewFormProps = {
   itemId: number;
   itemName: string;
+  isModalActive: boolean;
+  closeModalWindow: () => void
 };
 
-function ReviewForm({ itemId, itemName }: ReviewFormProps): JSX.Element {
+function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const [modalActive, setModalActive] = useState(true);
   const [formData, setFormData] = useState(DEFAULT_REVIEW_FORM_STATE);
-
-  const closeModalWindow = () => {
-    setModalActive(false);
-  };
 
   const formDataChangeHandler = ({target}: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const {name, value} = target;
@@ -76,8 +72,19 @@ function ReviewForm({ itemId, itemName }: ReviewFormProps): JSX.Element {
     }
   };
 
+  const onKeydown = ({ key }: KeyboardEvent) => {
+    if (key === 'Escape') {
+      closeModalWindow();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeydown);
+    return () => document.removeEventListener('keydown', onKeydown);
+  });
+
   return (
-    <div className={`modal modal--review modal-for-ui-kit ${modalActive ? 'is-active' : ''}`}>
+    <div className={`modal modal--review modal-for-ui-kit ${isModalActive ? 'is-active' : ''}`}>
       <div className="modal__wrapper">
         <div onClick={closeModalWindow} className="modal__overlay" data-close-modal></div>
         <div className="modal__content">
