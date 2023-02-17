@@ -5,7 +5,7 @@ function AddItemPage(): JSX.Element {
     <>
       <SiteHeader />
 
-      <main></main>
+      <main><h1>Add Item Page</h1></main>
 
       <footer></footer>
     </>

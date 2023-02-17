@@ -5,8 +5,7 @@ function ItemsListPage(): JSX.Element {
     <>
       <SiteHeader />
 
-      <main>
-      </main>
+      <main><h1>Items List Page</h1></main>
 
       <footer></footer>
     </>

@@ -19,7 +19,7 @@ import { AppRoute } from '../../../constants';
 
 function App(): JSX.Element {
   const userData = useAppSelector(getUserInfo);
-  const isAdmin = userData?.isAdmin || false;
+  const isAdmin = userData?.isAdmin || true; // не забыть поменять true на false
   // const isDataLoaded = useAppSelector(getLoadedDataStatus);
 
   // if (!isDataLoaded) {

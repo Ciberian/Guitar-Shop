@@ -2,17 +2,17 @@
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import { makeFakeItems } from '../../../utils/mocks';
-import CartItemsList from '../../../components/page-components/cart-items-list/cart-items-list';
+import Item from '../../../components/page-components/item/item';
 
 function CatalogPage(): JSX.Element {
-  const fakeItems = makeFakeItems(75, 190);
+  const fakeItems = makeFakeItems(36, 93);
 
   return (
     <>
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '940px', margin: '140px auto'}}>
-          <CartItemsList items={fakeItems} />
+          <Item item={fakeItems[1]} />
         </div>
       </main>
       <SiteFooter />

@@ -5,7 +5,7 @@ function OrderPage(): JSX.Element {
     <>
       <SiteHeader />
 
-      <main></main>
+      <main><h1>Order Page</h1></main>
 
       <footer></footer>
     </>

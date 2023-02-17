@@ -5,7 +5,7 @@ function EditItemPage(): JSX.Element {
     <>
       <SiteHeader />
 
-      <main></main>
+      <main><h1>Edit Item Page</h1></main>
 
       <footer></footer>
     </>
