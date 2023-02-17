@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import OrderItem from '../../../components/page-components/order-item/order-item';
 import { makeFakeOrders } from '../../../utils/mocks';
+import OrdersList from '../../../components/page-components/orders-list/orders-list';
 
 function CatalogPage(): JSX.Element {
   const orders = makeFakeOrders();
@@ -12,7 +12,7 @@ function CatalogPage(): JSX.Element {
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '940px', margin: '140px auto'}}>
-          <OrderItem order={orders[0]} />
+          <OrdersList orders={orders} />
         </div>
       </main>
       <SiteFooter />
