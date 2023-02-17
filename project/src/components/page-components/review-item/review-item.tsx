@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import Rating from '../../common/rating/rating';
 import { IReview } from '../../../types/review.interface';
 
 type ReviewItemProps = {
@@ -6,29 +6,23 @@ type ReviewItemProps = {
 };
 
 function ReviewItem({ review }: ReviewItemProps): JSX.Element {
-  const { author, comment, date } = review;
-  const formattedDate = dayjs(date).format('MMMM YYYY');
+  const { author, advantage, disadv, comment, rating, date } = review;
+  const formattedDate = date.toLocaleString('ru', {month: 'long', day: 'numeric'});
 
   return (
-    <li className="reviews__item">
-      <div className="reviews__user user">
-        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-        </div>
-        <span className="reviews__user-name">{author.name}</span>
+    <div className="review">
+      <div className="review__wrapper">
+        <h4 className="review__title review__title--author title title--lesser">{author.name}</h4>
+        <span className="review__date">{formattedDate}</span>
       </div>
-      <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
-        <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime={date.toISOString()}>
-          {formattedDate}
-        </time>
-      </div>
-    </li>
+      <Rating extraСlass='review__rating-panel' ratingValue={rating} />
+      <h4 className="review__title title title--lesser">Достоинства:</h4>
+      <p className="review__value">{advantage}</p>
+      <h4 className="review__title title title--lesser">Недостатки:</h4>
+      <p className="review__value">{disadv}</p>
+      <h4 className="review__title title title--lesser">Комментарий:</h4>
+      <p className="review__value">{comment}</p>
+    </div>
   );
 }
 

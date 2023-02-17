@@ -34,7 +34,7 @@ export const makeFakeReview = (id: number): IReview => ({
   advantage: random.words(22),
   disadv: random.words(22),
   comment: random.words(22),
-  rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
+  rating: datatype.number({ min: 1, max: 5, precision: 0.1 }),
   date: date.recent(),
 });
 

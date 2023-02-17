@@ -10,7 +10,7 @@ interface IOrderItemProps {
 
 function OrderItem({ order }: IOrderItemProps): JSX.Element {
   const { id, totalItems, totalPrice, date } = order;
-  const formattedDate = date.toLocaleString('ru', { year: 'numeric', month: 'numeric', day: 'numeric'});
+  const formattedDate = date.toLocaleString('ru', {year: 'numeric', month: 'numeric', day: 'numeric'});
   const dispatch = useAppDispatch();
 
   return (

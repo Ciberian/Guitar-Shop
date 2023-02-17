@@ -1,18 +1,18 @@
 /* eslint-disable no-console */
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import { makeFakeOrders } from '../../../utils/mocks';
-import OrdersList from '../../../components/page-components/orders-list/orders-list';
+import ReviewItem from '../../../components/page-components/review-item/review-item';
+import { makeFakeReviews } from '../../../utils/mocks';
 
 function CatalogPage(): JSX.Element {
-  const orders = makeFakeOrders();
+  const reviews = makeFakeReviews();
 
   return (
     <>
       <SiteHeader />
       <main className='page-content'>
         <div style={{width: '940px', margin: '140px auto'}}>
-          <OrdersList orders={orders} />
+          <ReviewItem review={reviews[0]} />
         </div>
       </main>
       <SiteFooter />

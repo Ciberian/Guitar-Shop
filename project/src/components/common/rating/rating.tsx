@@ -7,10 +7,13 @@ interface IRatingProps {
 }
 
 function Rating({ extraСlass = '', ratingValue = 0, reviewsCount = 0 }: IRatingProps): JSX.Element {
+  const starWidth = extraСlass === 'review__rating-panel' ? '16' : '12';
+  const starHeight = extraСlass === 'review__rating-panel' ? '16' : '11';
+
   return (
     <div className={`rate ${extraСlass}`}>
       {RATINGS.map((rating) => (
-        <svg key={`key-${rating}`} width="12" height="11" aria-hidden="true">
+        <svg key={`key-${rating}`} width={starWidth} height={starHeight} aria-hidden="true">
           <use xlinkHref={rating <= ratingValue ? '#icon-full-star' : '#icon-star'}></use>
         </svg>
       ))}
