@@ -1,8 +1,8 @@
+import Rating from '../../common/rating/rating';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
-import { deleteOrderAction } from '../../../store/api-actions';
 import { IItem } from '../../../types/item.interface';
-import Rating from '../../common/rating/rating';
+import { deleteOrderAction } from '../../../store/api-actions';
 
 interface IItemProps {
   item: IItem;
