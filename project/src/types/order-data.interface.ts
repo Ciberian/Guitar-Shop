@@ -1,14 +1,8 @@
-import { IItem } from './item.interface';
-
-type Items = {
-  item: IItem;
-  itemsCount: number;
-  itemsPrice: number;
-};
+import { ICartItem } from './cart-item.interface';
 
 export interface IOrderData {
   id?: number;
-  items: Items[];
+  items: ICartItem[];
   totalItems: number;
   totalPrice: number;
   userId?: number;

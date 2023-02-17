@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { GuitarType } from '../../../constants';
+import { useEffect, useRef, useState } from 'react';
+import { GuitarType, INITIAL_ITEM_COUNT } from '../../../constants';
 import { useAppDispatch } from '../../../hooks';
 import { deleteCartItemAction } from '../../../store/api-actions';
 import { IItem } from '../../../types/item.interface';
@@ -7,15 +7,14 @@ import CrossBtn from '../../common/cross-btn/cross-btn';
 
 interface ICartItemProps {
   item: IItem;
-  updateTotalPrice: (id: number, itemsCount: number, itemsSumPrice: number) => void;
+  updateOrder: (item: IItem, itemsCount: number, itemsSumPrice: number) => void;
 }
 
-const DEFAULT_ITEM_COUNT = 1;
-
-function CartItem({ item, updateTotalPrice }: ICartItemProps): JSX.Element {
-  const { id, image, name, sku, type, strings, price } = item;
+function CartItem({ item, updateOrder }: ICartItemProps): JSX.Element {
+  const { image, name, sku, type, strings, price } = item;
   const dispatch = useAppDispatch();
-  const [itemCount, setItemCount] = useState(DEFAULT_ITEM_COUNT);
+  const updateOrderRef = useRef(updateOrder);
+  const [itemCount, setItemCount] = useState(INITIAL_ITEM_COUNT);
 
   const increaseCount = () => {
     const increasedCount = itemCount + 1;
@@ -29,11 +28,11 @@ function CartItem({ item, updateTotalPrice }: ICartItemProps): JSX.Element {
 
   useEffect(() => {
     const itemsSumPrice = price * itemCount;
-    updateTotalPrice(id, itemCount, itemsSumPrice);
-  }, [updateTotalPrice, id, itemCount, price]);
+    updateOrderRef.current(item, itemCount, itemsSumPrice);
+  }, [item, itemCount, price]);
 
   const removeItem = () => {
-    dispatch(deleteCartItemAction(id));
+    dispatch(deleteCartItemAction(item.id));
   };
 
   return (

@@ -3,10 +3,9 @@ import Button from '../../common/button/button';
 import { useState } from 'react';
 import { IItem } from '../../../types/item.interface';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { AppRoute, AuthorizationStatus } from '../../../constants';
+import { AppRoute, AuthorizationStatus, INITIAL_ITEM_COUNT } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 import { useNavigate } from 'react-router-dom';
-import { IOrderData } from '../../../types/order-data.interface';
 import { addNewOrderAction } from '../../../store/api-actions';
 
 interface ICatalogItemProps {
@@ -14,38 +13,49 @@ interface ICatalogItemProps {
 }
 
 function CartItemsList({ items }: ICatalogItemProps): JSX.Element {
-  const prices = new Map(items.map((item) => [item.id, item.price]));
-  const initialTotalPrice = Array.from(prices.values()).reduce((total, price) => total + price, 0);
-  const [totalPrice, setTotalPrice] = useState(initialTotalPrice);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isUserAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const isUserAuthorized = authorizationStatus !== AuthorizationStatus.Auth;
 
-  const updateTotalPrice = (itemId: number, itemsCount: number, itemsSumPrice: number) => {
-    prices.set(itemId, itemsSumPrice);
-    const updatedTotalPrice = Array.from(prices.values()).reduce((total, price) => total + price, 0);
-    setTotalPrice(updatedTotalPrice);
+  const cartItems = new Map(items.map((item) => [item.id, {item, itemsCount: INITIAL_ITEM_COUNT, itemsSumPrice: item.price}]));
+  const initialCartItems = [...cartItems.values()];
+  const initialTotalItems = initialCartItems.reduce((total, cartItem) => total + cartItem.itemsCount, 0);
+  const initialTotalPrice = initialCartItems.reduce((total, cartItem) => total + cartItem.itemsSumPrice, 0);
+  const initialOrder = {
+    items: initialCartItems,
+    totalItems: initialTotalItems,
+    totalPrice: initialTotalPrice,
   };
 
-  const order: IOrderData = {
-    items: [],
-    totalItems: 0,
-    totalPrice: 0
+  const [order, setOrder] = useState(initialOrder);
+
+  const updateOrder = (item: IItem, itemsCount: number, itemsSumPrice: number) => {
+    cartItems.set(item.id, { item, itemsCount, itemsSumPrice });
+    const updatedCartItems = [...cartItems.values()];
+    const updatedTotalItems = updatedCartItems.reduce((total, cartItem) => total + cartItem.itemsCount, 0);
+    const updatedTotalPrice = updatedCartItems.reduce((total, cartItem) => total + cartItem.itemsSumPrice, 0);
+    const updatedOrder = {
+      items: updatedCartItems,
+      totalItems: updatedTotalItems,
+      totalPrice: updatedTotalPrice,
+    };
+
+    setOrder(updatedOrder);
   };
 
   return (
     <div className='cart'>
-      {items.map((item) => <CartItem key={item.id} item={item} updateTotalPrice={updateTotalPrice} />)}
+      {items.map((item) => <CartItem key={item.id} item={item} updateOrder={updateOrder} />)}
       <div className="cart__footer">
         <div className="cart__total-info">
           <p className="cart__total-item">
             <span className="cart__total-value-name">Всего:</span>
-            <span className="cart__total-value">{totalPrice} ₽</span>
+            <span className="cart__total-value">{order.totalPrice} ₽</span>
           </p>
           <p className="cart__total-item">
             <span className="cart__total-value-name">К оплате:</span>
-            <span className="cart__total-value cart__total-value--payment">{totalPrice} ₽</span>
+            <span className="cart__total-value cart__total-value--payment">{order.totalPrice} ₽</span>
           </p>
           <Button
             btnStyle='button--red'
