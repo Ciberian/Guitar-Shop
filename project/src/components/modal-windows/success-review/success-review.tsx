@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CrossBtn from '../../common/cross-btn/cross-btn';
 
 function SuccessReview(): JSX.Element {
@@ -7,6 +7,17 @@ function SuccessReview(): JSX.Element {
   const closeModalWindow = () => {
     setModalActive(false);
   };
+
+  const onKeydown = ({ key }: KeyboardEvent) => {
+    if (key === 'Escape') {
+      closeModalWindow();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeydown);
+    return () => document.removeEventListener('keydown', onKeydown);
+  });
 
   return (
     <div className={`modal modal--success modal-for-ui-kit ${modalActive ? 'is-active' : ''}`}>

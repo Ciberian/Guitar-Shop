@@ -19,7 +19,7 @@ function ReviewsList({ reviews, openModalWindow }: ReviewsListProps): JSX.Elemen
   };
 
   return (
-    <section className="reviews">
+    <section className="reviews" style={reviews.length === 0 ? {paddingBottom: '1px'} : {}}>
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
       <Button
         btnStyle='button--red-border'
