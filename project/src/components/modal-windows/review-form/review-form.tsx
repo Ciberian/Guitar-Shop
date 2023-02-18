@@ -24,9 +24,9 @@ function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: Revie
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState(DEFAULT_REVIEW_FORM_STATE);
 
-  const formDataChangeHandler = ({target}: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    const {name, value} = target;
-    const newFormData = {...formData, [name]: value};
+  const formDataChangeHandler = ({ target }: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = target;
+    const newFormData = { ...formData, [name]: value };
     setFormData(newFormData);
   };
 

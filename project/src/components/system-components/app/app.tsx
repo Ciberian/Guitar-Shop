@@ -29,7 +29,7 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path={AppRoute.Root}>
-        <Route index element={<Navigate to={AppRoute.Item} />} /> {/* Редирект на страницу с каталогом */}
+        <Route index element={<Navigate to={AppRoute.Catalog} />} /> {/* Редирект на страницу с каталогом */}
         <Route path={AppRoute.Catalog} element={<CatalogPage />} />
         <Route path={AppRoute.Item} element={<ItemPage />} />
         <Route path={AppRoute.Cart} element={<CartPage />} />
@@ -88,5 +88,5 @@ export default App;
 // В вёрстке почему-то нет Главной страницы (MainPage).
 // И в принципе страница со списком товаров (CatalogPage) может являтся Главной страницей.
 // Но есть нюанс на странице CatalogPage breadcrambs-навигация выглядит следующим образом: Главная -> Каталог
-// Т.е. Главная страница должна существовать, но по факту в markup/main.html Каталог гитар.
-// И потом для страницы Каталога отдельная кнопка в навигации, а для Главной страницы логотив обёрнутый в ссылку.
+// Т.е. Главная и Каталог - это не одно и тоже, но по факту в markup/main.html Каталог гитар.
+// И потом для страницы Каталога отдельная кнопка в навигации, а для Главной страницы логотип обёрнутый в ссылку.

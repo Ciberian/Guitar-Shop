@@ -8,7 +8,7 @@ interface ICatalogProps {
 function Catalog({ items }: ICatalogProps): JSX.Element {
   return (
     <div className='cards catalog__cards'>
-      {items.map((item) => <CatalogItem key={item.id} item={item} />)};
+      {items.map((item) => <CatalogItem key={item.id} item={item} />)}
     </div>
   );
 }

@@ -108,7 +108,7 @@ export const TIMEOUT_SHOW_ERROR = 3000;
 export const DEFAULT_ITEM_ID = 0;
 
 export const INITIAL_ITEM_COUNT = 1;
-export const MOCK_ITEMS_COUNT = 3;
+export const MOCK_ITEMS_COUNT = 10;
 export const MOCK_REVIEWS_COUNT = 10;
 export const REVIEWS_PER_CLICK = 3;
 export const MOCK_ORDERS_COUNT = 10;
