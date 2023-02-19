@@ -30,7 +30,7 @@ function CatalogItem({ item }: ICatalogItemProps): JSX.Element {
         alt={name}
       />
       <div className="product-card__info">
-        <Rating extraСlass='product-card__rate' ratingValue={rating} reviewsCount={reviewsCount} />
+        <Rating extraСlass='product-card__rate' ratingValue={rating} reviewsCount={reviewsCount} isShowRateCount />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price">
           <span className="visually-hidden">Цена:</span>{price} ₽

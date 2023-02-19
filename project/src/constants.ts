@@ -122,10 +122,12 @@ export const TIMEOUT_SHOW_ERROR = 3000;
 export const DEFAULT_ITEM_ID = 0;
 
 export const INITIAL_ITEM_COUNT = 1;
-export const MOCK_ITEMS_COUNT = 10;
+export const MOCK_ITEMS_COUNT = 40;
 export const MOCK_REVIEWS_COUNT = 10;
-export const REVIEWS_PER_CLICK = 3;
 export const MOCK_ORDERS_COUNT = 10;
+export const REVIEWS_PER_CLICK = 3;
+export const ITEMS_PER_PAGE = 9;
+export const DEFAULT_ACTIVE_PAGE = 1;
 
 export const MIN_IMG_ID = 1;
 export const MAX_IMG_ID = 50;

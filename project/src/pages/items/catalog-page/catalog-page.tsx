@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import Catalog from '../../../components/page-components/catalog/catalog';
 import Checkbox from '../../../components/form-elements/checkbox/checkbox';
+import Pagination from '../../../components/common/pagination/pagination';
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import { Link } from 'react-router-dom';
@@ -8,10 +8,18 @@ import { ChangeEvent, useState } from 'react';
 import { makeFakeItems } from '../../../utils/mocks';
 import { IItem } from '../../../types/item.interface';
 import { useDebounce } from '../../../hooks/use-debounce';
-import { AppRoute, DEFAULT_CATALOG_FILTER_VALUES, SortDirection, SortType } from '../../../constants';
+import {
+  AppRoute,
+  SortType,
+  SortDirection,
+  DEFAULT_ACTIVE_PAGE,
+  DEFAULT_CATALOG_FILTER_VALUES,
+  ITEMS_PER_PAGE,
+} from '../../../constants';
 
 function CatalogPage(): JSX.Element {
-  const items = makeFakeItems(75, 190);
+  // const items = useAppSelector(getItems);
+  const items = makeFakeItems(75, 190); // - удалить когда появится API
 
   const defaultSortedItems = items.slice().sort((item1, item2) => item1.price - item2.price);
   const itemMinPrice = defaultSortedItems[0].price;
@@ -42,6 +50,7 @@ function CatalogPage(): JSX.Element {
     const { type, name, checked, value } = target;
     const newFormData = type === 'checkbox' ? { ...formData, [name]: checked } : { ...formData, [name]: value };
     setFormData(newFormData);
+    setActivePage(DEFAULT_ACTIVE_PAGE);
   };
 
   const filteredByPrice = items
@@ -67,6 +76,11 @@ function CatalogPage(): JSX.Element {
     filteredByType.filter((item) => item.strings === 12) : [];
   const filteredItems = formData['4-strings'] || formData['6-strings'] || formData['7-strings'] || formData['12-strings'] ?
     [...strings4, ...strings6, ...strings7, ...strings12] : filteredByType;
+
+  const [activePage, setActivePage] = useState(DEFAULT_ACTIVE_PAGE);
+  const paginationChangeHandler = (page: number) => {
+    setActivePage(page);
+  };
 
   return (
     <>
@@ -175,48 +189,56 @@ function CatalogPage(): JSX.Element {
               <h2 className="catalog-sort__title">Сортировать:</h2>
               <div className="catalog-sort__type">
                 <button
-                  className="catalog-sort__type-button"
+                  className={`catalog-sort__type-button ${selectedSort === SortType.Price ? 'catalog-sort__type-button--active' : ''}`}
                   aria-label="по цене"
-                  onClick={() => setSelectedSort(SortType.Price)}
+                  onClick={() => {
+                    setActivePage(DEFAULT_ACTIVE_PAGE);
+                    setSelectedSort(SortType.Price);
+                  }}
                 >
                   по цене
                 </button>
                 <button
-                  className="catalog-sort__type-button"
+                  className={`catalog-sort__type-button ${selectedSort === SortType.Popular ? 'catalog-sort__type-button--active' : ''}`}
                   aria-label="по популярности"
-                  onClick={() => setSelectedSort(SortType.Popular)}
+                  onClick={() => {
+                    setActivePage(DEFAULT_ACTIVE_PAGE);
+                    setSelectedSort(SortType.Popular);
+                  }}
                 >
                   по популярности
                 </button>
               </div>
               <div className="catalog-sort__order">
                 <button
-                  className="catalog-sort__order-button catalog-sort__order-button--up"
+                  className={`catalog-sort__order-button catalog-sort__order-button--up ${sortDirection === SortDirection.toHigh ? 'catalog-sort__order-button--active' : ''}`}
                   aria-label="По возрастанию"
-                  onClick={() => setSortDirection(SortDirection.toHigh)}
+                  onClick={() => {
+                    setActivePage(DEFAULT_ACTIVE_PAGE);
+                    setSortDirection(SortDirection.toHigh);
+                  }}
                 >
                 </button>
                 <button
-                  className="catalog-sort__order-button catalog-sort__order-button--down"
+                  className={`catalog-sort__order-button catalog-sort__order-button--down ${sortDirection === SortDirection.toLow ? 'catalog-sort__order-button--active' : ''}`}
                   aria-label="По убыванию"
-                  onClick={() => setSortDirection(SortDirection.toLow)}
+                  onClick={() => {
+                    setActivePage(DEFAULT_ACTIVE_PAGE);
+                    setSortDirection(SortDirection.toLow);
+                  }}
                 >
                 </button>
               </div>
             </div>
-            <Catalog items={sortItems(selectedSort + sortDirection, filteredItems)} />
-            <div className="pagination page-content__pagination">
-              <ul className="pagination__list">
-                <li className="pagination__page pagination__page--active"><a className="link pagination__page-link" href="1">1</a>
-                </li>
-                <li className="pagination__page"><a className="link pagination__page-link" href="2">2</a>
-                </li>
-                <li className="pagination__page"><a className="link pagination__page-link" href="3">3</a>
-                </li>
-                <li className="pagination__page pagination__page--next" id="next"><a className="link pagination__page-link" href="2">Далее</a>
-                </li>
-              </ul>
-            </div>
+            <Catalog
+              items={sortItems(selectedSort + sortDirection, filteredItems)
+                .slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE)}
+            />
+            <Pagination
+              activePage={activePage}
+              itemsCount={filteredItems.length}
+              paginationChangeHandler={paginationChangeHandler}
+            />
           </div>
         </div>
       </main>

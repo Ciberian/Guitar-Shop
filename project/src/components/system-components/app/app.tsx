@@ -11,16 +11,24 @@ import RegisterPage from '../../../pages/auth/register-page/register-page';
 import NotFoundPage from '../../../pages/404/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 // import LoadingScreen from '../loading-screen/loading-screen';
-import { useAppSelector } from '../../../hooks';
+// import { useEffect } from 'react';
+// import { getItemsAction } from '../../../store/api-actions';
+// import { getLoadedDataStatus } from '../../../store/offers-data/selectors';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUserInfo } from '../../../store/user-process/selectors';
-// import { getLoadedDataStatus } from '../../../store/offers-data/selectors';
-import { AppRoute } from '../../../constants';
 
+import { AppRoute } from '../../../constants';
 function App(): JSX.Element {
   const userData = useAppSelector(getUserInfo);
   const isAdmin = userData?.isAdmin || true; // не забыть поменять true на false
+
+  // const dispatch = useAppDispatch();
   // const isDataLoaded = useAppSelector(getLoadedDataStatus);
+
+  // useEffect(() => {
+  //   dispatch(getItemsAction());
+  // });
 
   // if (!isDataLoaded) {
   //   return <LoadingScreen />;
