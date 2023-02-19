@@ -2,7 +2,7 @@ import { datatype, name, internet, random, date, finance } from 'faker';
 import { IItem } from '../types/item.interface';
 import { IUserData } from '../types/user-data.interface';
 import { DEFAULT_ITEM_ID, MAX_IMG_ID, MIN_IMG_ID, MOCK_ITEMS_COUNT, MOCK_ORDERS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
-import { getRandomInt } from './helpers';
+import { getRandomArrayElement, getRandomInt } from './helpers';
 import { IReview } from '../types/review.interface';
 import { IOrder } from '../types/order.interface';
 
@@ -19,9 +19,9 @@ export const makeFakeItem = (id: number, imgWidth: number, imgHeight: number): I
   name: random.words(3),
   description: random.words(15),
   image: `https://picsum.photos/id/${getRandomInt(MIN_IMG_ID, MAX_IMG_ID)}/${imgWidth}/${imgHeight}`,
-  type: 'аккустика',
+  type: getRandomArrayElement(['аккустика', 'электро', 'укулеле']),
   sku: finance.bic(),
-  strings: 6,
+  strings: getRandomArrayElement([4, 6, 7, 12]),
   rating: datatype.number({ min: 0, max: 5, precision: 0.1 }),
   price: datatype.number({ min: 1000, max: 10000 }),
   reviewsCount: datatype.number({ min: 0, max: 10 }),

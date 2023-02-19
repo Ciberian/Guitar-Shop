@@ -104,6 +104,18 @@ export const DEFAULT_REVIEW_FORM_STATE = {
   comment: '',
 };
 
+export const DEFAULT_CATALOG_FILTER_VALUES = {
+  priceMin: 0,
+  priceMax: 1000000,
+  аккустика: false,
+  электро: false,
+  укулеле: false,
+  '4-strings': false,
+  '6-strings': false,
+  '7-strings': false,
+  '12-strings': false,
+};
+
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const DEFAULT_ITEM_ID = 0;
 
@@ -114,7 +126,7 @@ export const REVIEWS_PER_CLICK = 3;
 export const MOCK_ORDERS_COUNT = 10;
 
 export const MIN_IMG_ID = 1;
-export const MAX_IMG_ID = 100;
+export const MAX_IMG_ID = 50;
 
 export const MIN_ADV_DISADV_LENGTH = 50;
 export const MAX_ADV_DISADV_LENGTH = 100;

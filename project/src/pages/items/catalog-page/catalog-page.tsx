@@ -1,22 +1,52 @@
 /* eslint-disable no-console */
 import Catalog from '../../../components/page-components/catalog/catalog';
+import Checkbox from '../../../components/form-elements/checkbox/checkbox';
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
-import { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../../constants';
+import { ChangeEvent, useState } from 'react';
 import { makeFakeItems } from '../../../utils/mocks';
+import { useDebounce } from '../../../hooks/use-debounce';
+import { AppRoute, DEFAULT_CATALOG_FILTER_VALUES } from '../../../constants';
 
 function CatalogPage(): JSX.Element {
   const items = makeFakeItems(75, 190);
+  items.sort((item1, item2) => item1.price - item2.price);
+  const itemMinPrice = items[0].price;
+  const itemMaxPrice = items[items.length - 1].price;
+
+  const [formData, setFormData] = useState(DEFAULT_CATALOG_FILTER_VALUES);
+  const debouncedFormData = useDebounce(formData, 2000);
 
   const formDataChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = target;
-    // eslint-disable-next-line no-console
-    console.log(name);
-    // eslint-disable-next-line no-console
-    console.log(checked);
+    const { type, name, checked, value } = target;
+    const newFormData = type === 'checkbox' ? { ...formData, [name]: checked } : { ...formData, [name]: value };
+    setFormData(newFormData);
   };
+
+  const filteredByPrice = items
+    .filter((item) => debouncedFormData.priceMin < item.price)
+    .filter((item) => debouncedFormData.priceMax > item.price);
+
+  const accoustic = formData['аккустика'] ?
+    filteredByPrice.filter((item) => item.type === 'аккустика') : [];
+  const electro = formData['электро'] ?
+    filteredByPrice.filter((item) => item.type === 'электро') : [];
+  const ukulele = formData['укулеле'] ?
+    filteredByPrice.filter((item) => item.type === 'укулеле') : [];
+  const filteredByType = formData['аккустика'] || formData['электро'] || formData['укулеле'] ?
+    [...accoustic, ...electro, ...ukulele] : filteredByPrice;
+
+  const strings4 = formData['4-strings'] ?
+    filteredByType.filter((item) => item.strings === 4) : [];
+  const strings6 = formData['6-strings'] ?
+    filteredByType.filter((item) => item.strings === 6) : [];
+  const strings7 = formData['7-strings'] ?
+    filteredByType.filter((item) => item.strings === 7) : [];
+  const strings12 = formData['12-strings'] ?
+    filteredByType.filter((item) => item.strings === 12) : [];
+  const filteredItems = formData['4-strings'] || formData['6-strings'] || formData['7-strings'] || formData['12-strings'] ?
+    [...strings4, ...strings6, ...strings7, ...strings12] : filteredByType;
 
   return (
     <>
@@ -40,49 +70,86 @@ function CatalogPage(): JSX.Element {
                 <div className="catalog-filter__price-range">
                   <div className="form-input">
                     <label className="visually-hidden">Минимальная цена</label>
-                    <input type="number" placeholder="1 000" id="priceMin" name="от" />
+                    <input
+                      type="number"
+                      placeholder={String(itemMinPrice)}
+                      id="priceMin"
+                      name="priceMin"
+                      min={0}
+                      onChange={formDataChangeHandler}
+                    />
                   </div>
                   <div className="form-input">
                     <label className="visually-hidden">Максимальная цена</label>
-                    <input type="number" placeholder="30 000" id="priceMax" name="до" />
+                    <input
+                      type="number"
+                      placeholder={String(itemMaxPrice)}
+                      id="priceMax"
+                      name="priceMax"
+                      onChange={formDataChangeHandler}
+                    />
                   </div>
                 </div>
               </fieldset>
               <fieldset className="catalog-filter__block">
                 <legend className="catalog-filter__block-title">Тип гитар</legend>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="acoustic" name="acoustic" />
-                  <label htmlFor="acoustic">Акустические гитары</label>
-                </div>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="electric" name="electric" />
-                  <label htmlFor="electric">Электрогитары</label>
-                </div>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="ukulele" name="ukulele" />
-                  <label htmlFor="ukulele">Укулеле</label>
-                </div>
+                <Checkbox
+                  name='аккустика'
+                  label='Акустические гитары'
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
+                <Checkbox
+                  name='электро'
+                  label='Электрогитары'
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
+                <Checkbox
+                  name='укулеле'
+                  label='Укулеле'
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
               </fieldset>
               <fieldset className="catalog-filter__block">
                 <legend className="catalog-filter__block-title">Количество струн</legend>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" checked />
-                  <label htmlFor="4-strings">4</label>
-                </div>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="6-strings" name="6-strings" checked />
-                  <label htmlFor="6-strings">6</label>
-                </div>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="7-strings" name="7-strings" />
-                  <label htmlFor="7-strings">7</label>
-                </div>
-                <div className="form-checkbox catalog-filter__block-item">
-                  <input className="visually-hidden" type="checkbox" id="12-strings" name="12-strings" disabled />
-                  <label htmlFor="12-strings">12</label>
-                </div>
+                <Checkbox
+                  name='4-strings'
+                  label='4'
+                  isDisabled={formData.аккустика}
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
+                <Checkbox
+                  name='6-strings'
+                  label='6'
+                  isDisabled={formData.укулеле}
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
+                <Checkbox
+                  name='7-strings'
+                  label='7'
+                  isDisabled={formData.укулеле}
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
+                <Checkbox
+                  name='12-strings'
+                  label='12'
+                  isDisabled={formData.электро || formData.укулеле}
+                  extraClass='catalog-filter__block-item'
+                  checkboxChangeHandler={formDataChangeHandler}
+                />
               </fieldset>
-              <button className="catalog-filter__reset-btn button button--black-border button--medium" type="reset">Очистить</button>
+              <button
+                className="catalog-filter__reset-btn button button--black-border button--medium"
+                type="reset"
+                onClick={() => setFormData(DEFAULT_CATALOG_FILTER_VALUES)}
+              >
+                Очистить
+              </button>
             </form>
             <div className="catalog-sort">
               <h2 className="catalog-sort__title">Сортировать:</h2>
@@ -95,7 +162,7 @@ function CatalogPage(): JSX.Element {
                 <button className="catalog-sort__order-button catalog-sort__order-button--down" aria-label="По убыванию"></button>
               </div>
             </div>
-            <Catalog items={items} />
+            <Catalog items={filteredItems} />
             <div className="pagination page-content__pagination">
               <ul className="pagination__list">
                 <li className="pagination__page pagination__page--active"><a className="link pagination__page-link" href="1">1</a>

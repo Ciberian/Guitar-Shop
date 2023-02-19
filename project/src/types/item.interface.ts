@@ -3,7 +3,7 @@ export interface IItem {
   name: string;
   description: string;
   image: string;
-  type: 'электро' | 'аккустика' | 'укулеле';
+  type: 'аккустика' | 'электро' | 'укулеле';
   sku: string;
   strings: 4 | 6 | 7 | 12;
   rating?: number;
