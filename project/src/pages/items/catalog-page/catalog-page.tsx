@@ -6,17 +6,37 @@ import SiteFooter from '../../../components/page-components/site-footer/site-foo
 import { Link } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { makeFakeItems } from '../../../utils/mocks';
+import { IItem } from '../../../types/item.interface';
 import { useDebounce } from '../../../hooks/use-debounce';
-import { AppRoute, DEFAULT_CATALOG_FILTER_VALUES } from '../../../constants';
+import { AppRoute, DEFAULT_CATALOG_FILTER_VALUES, SortDirection, SortType } from '../../../constants';
 
 function CatalogPage(): JSX.Element {
   const items = makeFakeItems(75, 190);
-  items.sort((item1, item2) => item1.price - item2.price);
-  const itemMinPrice = items[0].price;
-  const itemMaxPrice = items[items.length - 1].price;
+
+  const defaultSortedItems = items.slice().sort((item1, item2) => item1.price - item2.price);
+  const itemMinPrice = defaultSortedItems[0].price;
+  const itemMaxPrice = defaultSortedItems[items.length - 1].price;
+
+  const [selectedSort, setSelectedSort] = useState<string>(SortType.Price);
+  const [sortDirection, setSortDirection] = useState<string>(SortDirection.toHigh);
+
+  const sortItems = (sortType: string, catalogItems: IItem[]) => {
+    switch (sortType) {
+      case SortType.Price + SortDirection.toHigh:
+        return catalogItems.slice().sort((item1, item2) => item1.price - item2.price);
+      case SortType.Price + SortDirection.toLow:
+        return catalogItems.slice().sort((item1, item2) => item2.price - item1.price);
+      case SortType.Popular + SortDirection.toHigh:
+        return catalogItems.slice().sort((item1, item2) => item1.rating - item2.rating);
+      case SortType.Popular + SortDirection.toLow:
+        return catalogItems.slice().sort((item1, item2) => item2.rating - item1.rating);
+      default:
+        return catalogItems;
+    }
+  };
 
   const [formData, setFormData] = useState(DEFAULT_CATALOG_FILTER_VALUES);
-  const debouncedFormData = useDebounce(formData, 2000);
+  const debouncedFormData = useDebounce(formData, 1000);
 
   const formDataChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { type, name, checked, value } = target;
@@ -154,15 +174,37 @@ function CatalogPage(): JSX.Element {
             <div className="catalog-sort">
               <h2 className="catalog-sort__title">Сортировать:</h2>
               <div className="catalog-sort__type">
-                <button className="catalog-sort__type-button" aria-label="по цене">по цене</button>
-                <button className="catalog-sort__type-button" aria-label="по популярности">по популярности</button>
+                <button
+                  className="catalog-sort__type-button"
+                  aria-label="по цене"
+                  onClick={() => setSelectedSort(SortType.Price)}
+                >
+                  по цене
+                </button>
+                <button
+                  className="catalog-sort__type-button"
+                  aria-label="по популярности"
+                  onClick={() => setSelectedSort(SortType.Popular)}
+                >
+                  по популярности
+                </button>
               </div>
               <div className="catalog-sort__order">
-                <button className="catalog-sort__order-button catalog-sort__order-button--up" aria-label="По возрастанию"></button>
-                <button className="catalog-sort__order-button catalog-sort__order-button--down" aria-label="По убыванию"></button>
+                <button
+                  className="catalog-sort__order-button catalog-sort__order-button--up"
+                  aria-label="По возрастанию"
+                  onClick={() => setSortDirection(SortDirection.toHigh)}
+                >
+                </button>
+                <button
+                  className="catalog-sort__order-button catalog-sort__order-button--down"
+                  aria-label="По убыванию"
+                  onClick={() => setSortDirection(SortDirection.toLow)}
+                >
+                </button>
               </div>
             </div>
-            <Catalog items={filteredItems} />
+            <Catalog items={sortItems(selectedSort + sortDirection, filteredItems)} />
             <div className="pagination page-content__pagination">
               <ul className="pagination__list">
                 <li className="pagination__page pagination__page--active"><a className="link pagination__page-link" href="1">1</a>

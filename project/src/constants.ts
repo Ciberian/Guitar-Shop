@@ -24,12 +24,14 @@ export const APIRoute = {
 } as const;
 
 export const SortType = {
-  DateFromOld: 'по дате-возрастание',
-  DateFromNew: 'по дате-убывание',
-  PriceToHigh: 'по цене-возрастание',
-  PriceToLow: 'по цене-убывание',
-  PopularToHigh: 'по популярности-возрастание',
-  PopularToLow: 'по популярности-убывание',
+  Date: 'по дате',
+  Price: 'по цене',
+  Popular: 'по популярности',
+} as const;
+
+export const SortDirection = {
+  toHigh: ' - возрастание',
+  toLow: ' - убывание',
 } as const;
 
 export const NameSpace = {
@@ -102,7 +104,7 @@ export const DEFAULT_REVIEW_FORM_STATE = {
   advantage: '',
   disadv: '',
   comment: '',
-};
+} as const;
 
 export const DEFAULT_CATALOG_FILTER_VALUES = {
   priceMin: 0,
@@ -114,7 +116,7 @@ export const DEFAULT_CATALOG_FILTER_VALUES = {
   '6-strings': false,
   '7-strings': false,
   '12-strings': false,
-};
+} as const;
 
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const DEFAULT_ITEM_ID = 0;

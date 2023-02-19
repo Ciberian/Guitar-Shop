@@ -6,7 +6,7 @@ export interface IItem {
   type: 'аккустика' | 'электро' | 'укулеле';
   sku: string;
   strings: 4 | 6 | 7 | 12;
-  rating?: number;
+  rating: number;
   price: number;
   reviewsCount?: number;
   date: Date;
