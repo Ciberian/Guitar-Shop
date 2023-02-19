@@ -83,7 +83,7 @@ function CatalogPage(): JSX.Element {
   };
 
   return (
-    <>
+    <div className="wrapper">
       <SiteHeader />
       <main className='page-content'>
         <div className="container">
@@ -243,7 +243,7 @@ function CatalogPage(): JSX.Element {
         </div>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }
 

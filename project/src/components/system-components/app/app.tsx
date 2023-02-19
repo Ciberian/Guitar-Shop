@@ -14,7 +14,8 @@ import PrivateRoute from '../private-route/private-route';
 // import { useEffect } from 'react';
 // import { getItemsAction } from '../../../store/api-actions';
 // import { getLoadedDataStatus } from '../../../store/offers-data/selectors';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+// import { useAppDispatch } from '../../../hooks';
+import { useAppSelector } from '../../../hooks';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUserInfo } from '../../../store/user-process/selectors';
 
@@ -37,7 +38,7 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path={AppRoute.Root}>
-        <Route index element={<Navigate to={AppRoute.Catalog} />} /> {/* Редирект на страницу с каталогом */}
+        <Route index element={<Navigate to={AppRoute.Cart} />} /> {/* Редирект на страницу с каталогом */}
         <Route path={AppRoute.Catalog} element={<CatalogPage />} />
         <Route path={AppRoute.Item} element={<ItemPage />} />
         <Route path={AppRoute.Cart} element={<CartPage />} />
