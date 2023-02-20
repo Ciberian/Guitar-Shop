@@ -1,16 +1,32 @@
+import Sort from '../../../components/common/sort/sort';
 import Pagination from '../../../components/common/pagination/pagination';
 import OrdersList from '../../../components/page-components/orders-list/orders-list';
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import SiteHeader from '../../../components/page-components/site-header/site-header';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute, DEFAULT_ACTIVE_PAGE, ITEMS_PER_PAGE, SortDirection, SortType } from '../../../constants';
-import { makeFakeOrders } from '../../../utils/mocks';
 import { IOrder } from '../../../types/order.interface';
+import { makeFakeOrders } from '../../../utils/mocks';
+import {
+  AppRoute,
+  SortType,
+  SortDirection,
+  ITEMS_PER_PAGE,
+  DEFAULT_ACTIVE_PAGE,
+} from '../../../constants';
 
 function OrdersPage(): JSX.Element {
   const [selectedSort, setSelectedSort] = useState<string>(SortType.Date);
-  const [sortDirection, setSortDirection] = useState<string>(SortDirection.toHigh);
+  const [selectedOrder, setSelectedOrder] = useState<string>(SortDirection.toHigh);
+
+  const changeSort = (sortType: string, flag?: 'order') => {
+    setActivePage(DEFAULT_ACTIVE_PAGE);
+    if (flag === 'order') {
+      setSelectedOrder(sortType);
+    } else {
+      setSelectedSort(sortType);
+    }
+  };
 
   const sortOrders = (sortType: string, orders: IOrder[]) => {
     switch (sortType) {
@@ -48,53 +64,14 @@ function OrdersPage(): JSX.Element {
                 <Link className="link" to={'#'}> Заказы</Link>
               </li>
             </ul>
-            <div className="catalog-sort">
-              <h2 className="catalog-sort__title">Сортировать:</h2>
-              <div className="catalog-sort__type">
-                <button
-                  className={`catalog-sort__type-button ${selectedSort === SortType.Date ? 'catalog-sort__type-button--active' : ''}`}
-                  aria-label="по дате"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSelectedSort(SortType.Date);
-                  }}
-                >
-                  по дате
-                </button>
-                <button
-                  className={`catalog-sort__type-button ${selectedSort === SortType.Price ? 'catalog-sort__type-button--active' : ''}`}
-                  aria-label="по цене"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSelectedSort(SortType.Price);
-                  }}
-                >
-                  по цене
-                </button>
-              </div>
-              <div className="catalog-sort__order">
-                <button
-                  className={`catalog-sort__order-button catalog-sort__order-button--up ${sortDirection === SortDirection.toHigh ? 'catalog-sort__order-button--active' : ''}`}
-                  aria-label="По возрастанию"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSortDirection(SortDirection.toHigh);
-                  }}
-                >
-                </button>
-                <button
-                  className={`catalog-sort__order-button catalog-sort__order-button--down ${sortDirection === SortDirection.toLow ? 'catalog-sort__order-button--active' : ''}`}
-                  aria-label="По убыванию"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSortDirection(SortDirection.toLow);
-                  }}
-                >
-                </button>
-              </div>
-            </div>
+            <Sort
+              selectedSort={selectedSort}
+              selectedOrder={selectedOrder}
+              isHidePopular
+              sortHandler={changeSort}
+            />
             <OrdersList
-              orders={sortOrders(selectedSort + sortDirection, orders)
+              orders={sortOrders(selectedSort + selectedOrder, orders)
                 .slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE)}
             />
             <Pagination

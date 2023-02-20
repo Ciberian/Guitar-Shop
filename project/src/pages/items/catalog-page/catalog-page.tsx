@@ -16,6 +16,7 @@ import {
   DEFAULT_CATALOG_FILTER_VALUES,
   ITEMS_PER_PAGE,
 } from '../../../constants';
+import Sort from '../../../components/common/sort/sort';
 
 function CatalogPage(): JSX.Element {
   // const items = useAppSelector(getItems);
@@ -26,7 +27,16 @@ function CatalogPage(): JSX.Element {
   const itemMaxPrice = defaultSortedItems[items.length - 1].price;
 
   const [selectedSort, setSelectedSort] = useState<string>(SortType.Price);
-  const [sortDirection, setSortDirection] = useState<string>(SortDirection.toHigh);
+  const [selectedOrder, setSelectedOrder] = useState<string>(SortDirection.toHigh);
+
+  const changeSort = (sortType: string, flag?: 'order') => {
+    setActivePage(DEFAULT_ACTIVE_PAGE);
+    if (flag === 'order') {
+      setSelectedOrder(sortType);
+    } else {
+      setSelectedSort(sortType);
+    }
+  };
 
   const sortItems = (sortType: string, catalogItems: IItem[]) => {
     switch (sortType) {
@@ -185,53 +195,14 @@ function CatalogPage(): JSX.Element {
                 Очистить
               </button>
             </form>
-            <div className="catalog-sort">
-              <h2 className="catalog-sort__title">Сортировать:</h2>
-              <div className="catalog-sort__type">
-                <button
-                  className={`catalog-sort__type-button ${selectedSort === SortType.Price ? 'catalog-sort__type-button--active' : ''}`}
-                  aria-label="по цене"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSelectedSort(SortType.Price);
-                  }}
-                >
-                  по цене
-                </button>
-                <button
-                  className={`catalog-sort__type-button ${selectedSort === SortType.Popular ? 'catalog-sort__type-button--active' : ''}`}
-                  aria-label="по популярности"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSelectedSort(SortType.Popular);
-                  }}
-                >
-                  по популярности
-                </button>
-              </div>
-              <div className="catalog-sort__order">
-                <button
-                  className={`catalog-sort__order-button catalog-sort__order-button--up ${sortDirection === SortDirection.toHigh ? 'catalog-sort__order-button--active' : ''}`}
-                  aria-label="По возрастанию"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSortDirection(SortDirection.toHigh);
-                  }}
-                >
-                </button>
-                <button
-                  className={`catalog-sort__order-button catalog-sort__order-button--down ${sortDirection === SortDirection.toLow ? 'catalog-sort__order-button--active' : ''}`}
-                  aria-label="По убыванию"
-                  onClick={() => {
-                    setActivePage(DEFAULT_ACTIVE_PAGE);
-                    setSortDirection(SortDirection.toLow);
-                  }}
-                >
-                </button>
-              </div>
-            </div>
+            <Sort
+              selectedSort={selectedSort}
+              selectedOrder={selectedOrder}
+              isHideDate
+              sortHandler={changeSort}
+            />
             <Catalog
-              items={sortItems(selectedSort + sortDirection, filteredItems)
+              items={sortItems(selectedSort + selectedOrder, filteredItems)
                 .slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE)}
             />
             <Pagination
