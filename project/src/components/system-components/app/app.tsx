@@ -38,7 +38,7 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path={AppRoute.Root}>
-        <Route index element={<Navigate to={AppRoute.Login} />} /> {/* Редирект на страницу с каталогом */}
+        <Route index element={<Navigate to={AppRoute.Register} />} /> {/* Редирект на страницу с каталогом */}
         <Route path={AppRoute.Catalog} element={<CatalogPage />} />
         <Route path={AppRoute.Item} element={<ItemPage />} />
         <Route path={AppRoute.Cart} element={<CartPage />} />

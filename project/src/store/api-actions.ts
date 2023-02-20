@@ -219,3 +219,17 @@ export const logoutAction = createAsyncThunk<
   await api.delete(APIRoute.Logout);
   dropToken();
 });
+
+export const registerAction = createAsyncThunk<
+  IUserData,
+  IAuthData,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('user/registerAction', async ({ name, email, password }, { extra: api }) => {
+  const { data } = await api.post<IUserData>(APIRoute.Register, { name, email, password });
+  saveToken(data.token);
+  return data;
+});

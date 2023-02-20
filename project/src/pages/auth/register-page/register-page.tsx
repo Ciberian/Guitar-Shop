@@ -1,18 +1,24 @@
-import { useRef, useEffect, FormEvent } from 'react';
+import SiteHeader from '../../../components/page-components/site-header/site-header';
+import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, FormEvent, ChangeEvent, useState } from 'react';
+import { registerAction } from '../../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { loginAction } from '../../../store/api-actions';
-import { IAuthData } from '../../../types/auth-data.interface';
-import { AppRoute, AuthorizationStatus } from '../../../constants';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
+import {
+  AppRoute,
+  AuthorizationStatus,
+  MIN_NAME_LENGTH,
+  MAX_NAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  MAX_PASSWORD_LENGTH,
+} from '../../../constants';
 
 function RegisterPage(): JSX.Element {
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -20,59 +26,92 @@ function RegisterPage(): JSX.Element {
     }
   }, [authorizationStatus, navigate]);
 
-  const onSubmit = (authData: IAuthData) => {
-    dispatch(loginAction(authData));
+  const [formData, setFormData] = useState({name: '', email: '', password: ''});
+
+  const formDataChangeHandler = ({ target }: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = target;
+    const newFormData = { ...formData, [name]: value };
+    setFormData(newFormData);
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const loginFormSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    dispatch(registerAction(formData));
+  };
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        email: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
-    }
+  const [passwordView, setPasswordView] = useState(false);
+
+  const changePasswordView = () => {
+    const toggledPasswordView = !passwordView;
+    setPasswordView(toggledPasswordView);
   };
 
   return (
-    <div className="page page--gray page--login">
-      <main className="page__main page__main--login">
-        <div className="page__login-container container">
+    <div className="wrapper">
+      <SiteHeader />
+      <main className="page-content">
+        <div className="container">
           <section className="login">
-            <h1 className="login__title">Sign up</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
+            <h1 className="login__title">Регистрация</h1>
+            <form onSubmit={loginFormSubmitHandler} action="#" method="get">
+              <div className="input-login">
+                <label htmlFor="name">Введите имя</label>
                 <input
-                  ref={loginRef}
-                  className="login__input form__input"
+                  type="text"
+                  id="name"
+                  name="name"
+                  autoComplete="off"
+                  minLength={MIN_NAME_LENGTH}
+                  maxLength={MAX_NAME_LENGTH}
+                  onChange={formDataChangeHandler}
+                  required
+                />
+                <p className="input-login__error">{formData.name.trim().length === 0 ? 'Заполните поле' : ''}</p>
+              </div>
+              <div className="input-login">
+                <label htmlFor="email">Введите e-mail</label>
+                <input
                   type="email"
+                  id="email"
                   name="email"
-                  placeholder="Email"
-                  pattern="[a-zA-Z0-9\._]+@[a-zA-Z0-9\.-]+\.[a-zA-Z]{2,4}"
+                  autoComplete="off"
+                  onChange={formDataChangeHandler}
                   required
                 />
+                <p className="input-login__error">{formData.email.trim().length === 0 ? 'Заполните поле' : ''}</p>
               </div>
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
-                <input
-                  ref={passwordRef}
-                  className="login__input form__input"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  pattern="(?=.*[0-9])(?=.*[a-zA-Z | а-яёЁА-Я])[a-zA-Zа-яёЁА-Я0-9]{2,42}"
-                  required
-                />
+              <div className="input-login">
+                <label htmlFor="password">Придумайте пароль</label>
+                <span>
+                  <input
+                    type={ passwordView ? 'text' : 'password'}
+                    placeholder="• • • • • • • • • • • •"
+                    id="password"
+                    name="password"
+                    autoComplete="off"
+                    minLength={MIN_PASSWORD_LENGTH}
+                    maxLength={MAX_PASSWORD_LENGTH}
+                    onChange={formDataChangeHandler}
+                    required
+                  />
+                  <button
+                    className="input-login__button-eye"
+                    type="button"
+                    onClick={changePasswordView}
+                  >
+                    <svg width="14" height="8" aria-hidden="true">
+                      <use xlinkHref="#icon-eye"></use>
+                    </svg>
+                  </button>
+                </span>
+                <p className="input-login__error">{formData.password.trim().length === 0 ? 'Заполните поле' : ''}</p>
               </div>
-              <button className="login__submit form__submit button" type="submit">
-                Sign in
-              </button>
+              <button className="button login__button button--medium" type="submit">Зарегистрироваться</button>
             </form>
           </section>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }
