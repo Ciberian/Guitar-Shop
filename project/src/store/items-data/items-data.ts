@@ -16,6 +16,7 @@ import {
   getOrderAction,
   addNewOrderAction,
   deleteOrderAction,
+  updateOrderAction,
 } from '../api-actions';
 
 const initialState: ItemsData = {
@@ -101,6 +102,10 @@ export const itemsData = createSlice({
         state.isOrderLoaded = true;
       })
       .addCase(addNewOrderAction.fulfilled, (state, action) => {
+        state.orders.push(action.payload);
+      })
+      .addCase(updateOrderAction.fulfilled, (state, action) => {
+        state.orders = state.orders.filter((order) => order.id !== action.payload.id);
         state.orders.push(action.payload);
       })
       .addCase(deleteOrderAction.fulfilled, (state, action) => {

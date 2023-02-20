@@ -8,7 +8,7 @@ interface IOrderItemProps {
   order: IOrder;
 }
 
-function OrderItem({ order }: IOrderItemProps): JSX.Element {
+function Order({ order }: IOrderItemProps): JSX.Element {
   const { id, totalItems, totalPrice, date } = order;
   const formattedDate = date.toLocaleString('ru', {year: 'numeric', month: 'numeric', day: 'numeric'});
   const dispatch = useAppDispatch();
@@ -32,4 +32,4 @@ function OrderItem({ order }: IOrderItemProps): JSX.Element {
   );
 }
 
-export default OrderItem;
+export default Order;

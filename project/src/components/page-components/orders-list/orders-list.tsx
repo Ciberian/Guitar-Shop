@@ -1,4 +1,4 @@
-import OrderItem from '../order-item/order-item';
+import Order from '../order/order';
 import { IOrder } from '../../../types/order.interface';
 
 interface IOrdersListProps {
@@ -8,7 +8,7 @@ interface IOrdersListProps {
 function OrdersList({ orders }: IOrdersListProps): JSX.Element {
   return (
     <ul className='orders__list'>
-      {orders.map((order) => <OrderItem key={order.id} order={order} />)}
+      {orders.map((order) => <Order key={order.id} order={order} />)}
     </ul>
   );
 }

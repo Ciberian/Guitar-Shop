@@ -1,7 +1,7 @@
 import { datatype, name, internet, random, date, finance } from 'faker';
 import { IItem } from '../types/item.interface';
 import { IUserData } from '../types/user-data.interface';
-import { DEFAULT_ITEM_ID, MAX_IMG_ID, MIN_IMG_ID, MOCK_ITEMS_COUNT, MOCK_ORDERS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
+import { MAX_IMG_ID, MIN_IMG_ID, MOCK_ITEMS_COUNT, MOCK_ORDERS_COUNT, MOCK_REVIEWS_COUNT } from '../constants';
 import { getRandomArrayElement, getRandomInt } from './helpers';
 import { IReview } from '../types/review.interface';
 import { IOrder } from '../types/order.interface';
@@ -38,15 +38,25 @@ export const makeFakeReview = (id: number): IReview => ({
   date: date.recent(),
 });
 
+const itemsForOrder = [{
+  item: makeFakeItem(1, 36, 93),
+  itemsCount: datatype.number({ min: 1, max: 10 }),
+  itemsPrice: datatype.number({ min: 1000, max: 10000 }),
+}, {
+  item: makeFakeItem(2, 36, 93),
+  itemsCount: datatype.number({ min: 1, max: 10 }),
+  itemsPrice: datatype.number({ min: 1000, max: 10000 }),
+}, {
+  item: makeFakeItem(3, 36, 93),
+  itemsCount: datatype.number({ min: 1, max: 10 }),
+  itemsPrice: datatype.number({ min: 1000, max: 10000 }),
+}];
+
 export const makeFakeOrder = (id: number): IOrder => ({
   id: id,
-  items: new Array(3).fill({
-    item: makeFakeItem(DEFAULT_ITEM_ID, 36, 93),
-    itemsCount: datatype.number({ min: 1, max: 10 }),
-    itemsPrice: datatype.number({ min: 1000, max: 10000 }),
-  }),
+  items: itemsForOrder,
   totalItems: datatype.number({ min: 3, max: 10 }),
-  totalPrice: datatype.number({ min: 1000, max: 10000 }),
+  totalPrice: datatype.number({ min: 30000, max: 100000 }),
   userId: datatype.number(),
   date: date.recent(),
 });

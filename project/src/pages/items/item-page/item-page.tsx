@@ -5,15 +5,18 @@ import SiteHeader from '../../../components/page-components/site-header/site-hea
 import SiteFooter from '../../../components/page-components/site-footer/site-footer';
 import ReviewsList from '../../../components/page-components/reviews-list/reviews-list';
 import ReviewForm from '../../../components/modal-windows/review-form/review-form';
+import SuccessReview from '../../../components/modal-windows/success-review/success-review';
 import LoadingScreen from '../../../components/system-components/loading-screen/loading-screen';
-import { useEffect, useRef, useState } from 'react';
+// import { useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute } from '../../../constants';
-import { addNewCartItemAction, getItemAction, getReviewsAction } from '../../../store/api-actions';
-import { getLoadedItemStatus, getItem, getReviews } from '../../../store/items-data/selectors';
+import { addNewCartItemAction } from '../../../store/api-actions';
+// import { getItemAction, getReviewsAction } from '../../../store/api-actions';
+// import { getItem, getReviews } from '../../../store/items-data/selectors';
+import { getLoadedItemStatus } from '../../../store/items-data/selectors';
 import { makeFakeItem, makeFakeReviews } from '../../../utils/mocks';
-import SuccessReview from '../../../components/modal-windows/success-review/success-review';
 
 
 function ItemPage(): JSX.Element {
@@ -21,10 +24,15 @@ function ItemPage(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  // useEffect(() => { - раcкомментировать если появится API
+  //   dispatch(getItemAction(Number(id)));
+  //   dispatch(getReviewsAction(Number(id)));
+  // }, [id, dispatch]);
+
   const isItemLoaded = useAppSelector(getLoadedItemStatus);
-  // const item = useAppSelector(getItem);
+  // const item = useAppSelector(getItem); - раcкомментировать если появится API
   const item = makeFakeItem(Number(id), 90, 235); // - удалить когда появится API
-  // const reviews = useAppSelector(getReviews);
+  // const reviews = useAppSelector(getReviews); - раcкомментировать если появится API
   const reviews = makeFakeReviews(); // - удалить когда появится API
   const initialReviewsCount = useRef(reviews.length);
   const [modalActive, setModalActive] = useState(false);
@@ -46,18 +54,13 @@ function ItemPage(): JSX.Element {
     return false;
   };
 
-  if (isItemLoaded) { // - поменять на обратное значение - !isItemLoaded
+  if (isItemLoaded) { // - если будет API, то поменять на обратное значение, - !isItemLoaded
     return <LoadingScreen />;
   }
 
   if (!item) {
     navigate(AppRoute.NotFoundPage);
   }
-
-  // useEffect(() => {
-  //   dispatch(getItemAction(Number(id)));
-  //   dispatch(getReviewsAction(Number(id)));
-  // }, [id, dispatch]);
 
   return (
     <div className="wrapper">

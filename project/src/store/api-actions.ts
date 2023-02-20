@@ -168,6 +168,18 @@ export const addNewOrderAction = createAsyncThunk<
   return data;
 });
 
+export const updateOrderAction = createAsyncThunk<
+  IOrder,
+  IOrder, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('items/updateOrderAction', async ({id, items, totalItems, totalPrice }, { extra: api }) => {
+  const { data } = await api.patch<IOrder>(`${APIRoute.Orders}/${id}`, { items, totalItems, totalPrice });
+  return data;
+});
+
 export const deleteOrderAction = createAsyncThunk<
   number,
   number, {
