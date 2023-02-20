@@ -3,7 +3,7 @@ import SiteHeader from '../../../components/page-components/site-header/site-hea
 import LoadingScreen from '../../../components/system-components/loading-screen/loading-screen';
 // import { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../hooks';
 // import { getOrderAction } from '../../../store/api-actions';
 // import { getOrder } from '../../../store/items-data/selectors';
 import { getLoadedOrderStatus } from '../../../store/items-data/selectors';
@@ -14,7 +14,6 @@ import OrderList from '../../../components/page-components/order-list/order-list
 function OrderPage(): JSX.Element {
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   // useEffect(() => {
   //   dispatch(getOrderAction(Number(id)));
@@ -33,9 +32,6 @@ function OrderPage(): JSX.Element {
   if (!order) {
     navigate(AppRoute.NotFoundPage);
   }
-
-  // eslint-disable-next-line no-console
-  console.log(order);
 
   return (
     <div className='wrapper'>
@@ -74,7 +70,9 @@ function OrderPage(): JSX.Element {
               </tfoot>
             </table>
             <OrderList order={order} />
-            <button className="button order__button button--small button--black-border">Вернуться к списку заказов</button>
+            <button className="button order__button button--small button--black-border" onClick={() => navigate(AppRoute.Orders)}>
+              Вернуться к списку заказов
+            </button>
           </div>
         </section>
       </main>
