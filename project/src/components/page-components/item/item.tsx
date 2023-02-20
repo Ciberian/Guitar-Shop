@@ -2,7 +2,7 @@ import Rating from '../../common/rating/rating';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import { IItem } from '../../../types/item.interface';
-import { deleteOrderAction } from '../../../store/api-actions';
+import { deleteItemAction } from '../../../store/api-actions';
 
 interface IItemProps {
   item: IItem;
@@ -41,7 +41,7 @@ function Item({ item }: IItemProps): JSX.Element {
           className="button button--small button--black-border"
           type="submit"
           aria-label="Удалить товар"
-          onClick={() => dispatch(deleteOrderAction(id))}
+          onClick={() => dispatch(deleteItemAction(id))}
         >
             Удалить
         </button>
