@@ -37,7 +37,7 @@ function CatalogItem({ item }: ICatalogItemProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <Link className="button button--mini" to={AppRoute.Cart}>Подробнее</Link>
+        <Link className="button button--mini" to={AppRoute.Item}>Подробнее</Link>
         {isItemInCart ?
           <Link
             className='button button--red-border button--mini button--in-cart'
