@@ -237,6 +237,7 @@ function CatalogPage(): JSX.Element {
             <Pagination
               activePage={activePage}
               itemsCount={filteredItems.length}
+              extraClass={'page-content__pagination'}
               paginationChangeHandler={paginationChangeHandler}
             />
           </div>

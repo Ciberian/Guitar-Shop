@@ -4,10 +4,11 @@ import { ITEMS_PER_PAGE } from '../../../constants';
 interface IFormRatingProps {
   activePage: number;
   itemsCount: number;
+  extraClass?: string;
   paginationChangeHandler: (page: number) => void;
 }
 
-function Pagination({activePage, itemsCount, paginationChangeHandler}: IFormRatingProps): JSX.Element {
+function Pagination({activePage, itemsCount, extraClass, paginationChangeHandler}: IFormRatingProps): JSX.Element {
   const maxPage = Math.ceil(itemsCount / ITEMS_PER_PAGE);
 
   const getPageValue = (page: number, btnNumber: 1 | 2 | 3) => {
@@ -55,7 +56,7 @@ function Pagination({activePage, itemsCount, paginationChangeHandler}: IFormRati
   };
 
   return (
-    <div className="pagination page-content__pagination">
+    <div className={`pagination ${extraClass}`}>
       <ul className="pagination__list">
         {activePage !== 1 &&
         <li className="pagination__page pagination__page--next" id="next">
