@@ -138,6 +138,9 @@ export const MAX_ADV_DISADV_LENGTH = 100;
 export const MIN_COMMENT_LENGTH = 5;
 export const MAX_COMMENT_LENGTH = 1024;
 
+export const MIN_PASSWORD_LENGTH = 6;
+export const MAX_PASSWORD_LENGTH = 12;
+
 export const TEXT_FIELD_ERROR_MESSAGE = {
   EmptyField: 'Заполните поле.',
   МinCharacters: 'Минимальная длина 50 символов.',

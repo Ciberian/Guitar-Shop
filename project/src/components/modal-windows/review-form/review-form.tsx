@@ -44,18 +44,22 @@ function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: Revie
       if (textLength < MIN_COMMENT_LENGTH) {
         return TEXT_FIELD_ERROR_MESSAGE.МinCharactersForComment;
       }
+
       if (textLength === MAX_COMMENT_LENGTH) {
         return TEXT_FIELD_ERROR_MESSAGE.МaxCharactersForComment;
       }
+
       return '';
     }
 
     if (textLength < MIN_ADV_DISADV_LENGTH) {
       return TEXT_FIELD_ERROR_MESSAGE.МinCharacters;
     }
+
     if (textLength === MAX_ADV_DISADV_LENGTH) {
       return TEXT_FIELD_ERROR_MESSAGE.МaxCharacters;
     }
+
     return '';
   };
 
@@ -92,6 +96,7 @@ function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: Revie
           <form
             className="form-review"
             onSubmit={reviewFormSubmitHandler}
+            action="#" method="post"
           >
             <div className="form-review__wrapper">
               <h3 className="form-review__title">{itemName}</h3>
@@ -111,7 +116,7 @@ function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: Revie
               maxLength={MAX_ADV_DISADV_LENGTH}
               onChange={formDataChangeHandler}
             />
-            <p className="form-review__warning"> {getReviewWarningMessage(formData.advantage.length)}</p>
+            <p className="form-review__warning"> {getReviewWarningMessage(formData.advantage.trim().length)}</p>
             <label className="form-review__label form-review__label--required" htmlFor="disadv">Недостатки</label>
             <input
               className="form-review__input"
@@ -123,7 +128,7 @@ function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: Revie
               maxLength={MAX_ADV_DISADV_LENGTH}
               onChange={formDataChangeHandler}
             />
-            <p className="form-review__warning"> {getReviewWarningMessage(formData.disadv.length)}</p>
+            <p className="form-review__warning"> {getReviewWarningMessage(formData.disadv.trim().length)}</p>
             <label className="form-review__label form-review__label--required form-review__label--textarea" htmlFor="comment">Комментарий</label>
             <textarea
               className="form-review__input form-review__input--textarea"
@@ -135,7 +140,7 @@ function ReviewForm({ itemId, itemName, isModalActive, closeModalWindow }: Revie
               onChange={formDataChangeHandler}
             >
             </textarea>
-            <p className="form-review__warning"> {getReviewWarningMessage(formData.comment.length, true)}</p>
+            <p className="form-review__warning"> {getReviewWarningMessage(formData.comment.trim().length, true)}</p>
             <button
               className="button button--medium-20 form-review__button"
               type="submit"
